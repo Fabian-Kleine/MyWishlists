@@ -9,11 +9,14 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-logo": "linear-gradient(45deg, hsla(175, 79%, 63%, 1) 0%, hsla(82, 96%, 57%, 1) 100%)"
       },
-    },
+      backgroundSize: {
+        "nav-logo": "150px"
+      }
+    }
   },
-  plugins: [],
+  daisyui: {
+    themes: ["dark"],
+  },
 };
