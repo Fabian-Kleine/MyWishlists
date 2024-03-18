@@ -3,27 +3,27 @@
 import { supabase } from "@/utils/supabase";
 import { useState, useEffect } from "react";
 
-async function getViews() {
-    const views  = await supabase
-    .from('statistics')
-    .select('views');
-    return views.data[0].views;
+async function getWishlists() {
+    const wishlists  = await supabase
+    .from('wishlists')
+    .select('id');
+    return wishlists.data.length;
 }
 
-export default function ViewCount() {
-    const [views, setViews] = useState(0);
+export default function WishlistCount() {
+    const [wishlists, setWishlists] = useState(0);
 
     useEffect(() => {
-        setViews(getViews())
+        setWishlists(getWishlists())
         const channel = supabase
-            .channel('statistics')
+            .channel('wishlists')
             .on(
                 'postgres_changes',
                 {
                     event: '*',
                     schema: '*'
                 },
-                payload => setViews(payload.new.views)
+                () => setWishlists(getWishlists())
             )
             .subscribe()
 
@@ -32,5 +32,5 @@ export default function ViewCount() {
         }
     }, []);
 
-    return <>{views}</>
+    return <>{wishlists}</>
 }

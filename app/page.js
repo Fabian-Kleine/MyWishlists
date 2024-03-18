@@ -1,30 +1,11 @@
 import { supabase } from "@/utils/supabase";
 import { ScrollText, MonitorSmartphone, Zap } from "lucide-react";
-import ViewCount from "@/components/ViewCount";
+import ViewCount from "@/components/counters/ViewCount";
+import WishlistCount from "@/components/counters/WishlistCount";
+import DeviceCount from "@/components/counters/DeviceCount";
 import PageViews from "@/utils/pageviews";
 
-async function getWishlists() {
-  const { data, error } = await supabase
-    .from('wishlists')
-    .select('id');
-
-  if (error) throw error;
-  return data;
-}
-
-async function getDevices() {
-  const { data, error } = await supabase
-    .from('devices')
-    .select('id');
-
-  if (error) throw error;
-  return data;
-}
-
 export default async function Home() {
-  const wishlists = await getWishlists();
-
-  const devices = await getDevices();
 
   return (
     <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-between px-24">
@@ -43,7 +24,7 @@ export default async function Home() {
             <ScrollText height={30} width={30} />
           </div>
           <div className="stat-title">Wishlist</div>
-          <div className="stat-value text-primary">{wishlists.length}</div>
+          <div className="stat-value text-primary"><WishlistCount /></div>
           <div className="stat-desc invisible">21% more than last month</div>
         </div>
 
@@ -52,7 +33,7 @@ export default async function Home() {
             <MonitorSmartphone height={30} width={30} />
           </div>
           <div className="stat-title">Registered Devices</div>
-          <div className="stat-value text-accent">{devices.length}</div>
+          <div className="stat-value text-accent"><DeviceCount /></div>
           <div className="stat-desc invisible">21% more than last month</div>
         </div>
 
