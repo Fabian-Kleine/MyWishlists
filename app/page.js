@@ -1,10 +1,19 @@
-import Image from "next/image";
 import { supabase } from "@/utils/supabase";
+import { ScrollText, MonitorSmartphone, Zap } from "lucide-react";
 
 async function getWishlists() {
   const { data, error } = await supabase
     .from('wishlists')
-    .select('*');
+    .select('id');
+
+  if (error) throw error;
+  return data;
+}
+
+async function getDevices() {
+  const { data, error } = await supabase
+    .from('devices')
+    .select('id');
 
   if (error) throw error;
   return data;
@@ -13,15 +22,48 @@ async function getWishlists() {
 export default async function Home() {
   const wishlists = await getWishlists();
 
-  console.log(wishlists);
+  const devices = await getDevices();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <pre>
-        {wishlists.map((wishlist, index) => 
-          <div key={index} >{"{"}"id": {wishlist.id}{"}"}</div>
-        )}
-      </pre>
+    <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-between px-24">
+      <div className="hero min-h-screen">
+        <div className="hero-content text-center">
+          <div className="max-w-md">
+            <h1 className="text-5xl font-bold bg-gradient-logo text-transparent bg-clip-text leading-snug">My Wishlists</h1>
+            <h2 className="text-lg py-6">Create Wishlists and share them</h2>
+            <button className="btn btn-accent">Create Wishlist</button>
+          </div>
+        </div>
+      </div>
+      <div className="stats shadow mb-24">
+        <div className="stat">
+          <div className="stat-figure text-primary">
+            <ScrollText height={30} width={30} />
+          </div>
+          <div className="stat-title">Wishlist</div>
+          <div className="stat-value text-primary">{wishlists.length}</div>
+          <div className="stat-desc invisible">21% more than last month</div>
+        </div>
+
+        <div className="stat">
+          <div className="stat-figure text-accent">
+            <MonitorSmartphone height={30} width={30} />
+          </div>
+          <div className="stat-title">Registered Devices</div>
+          <div className="stat-value text-accent">{devices.length}</div>
+          <div className="stat-desc invisible">21% more than last month</div>
+        </div>
+
+        <div className="stat">
+          <div className="stat-figure text-secondary">
+            <Zap height={30} width={30} />
+          </div>
+          <div className="stat-title">Page Views</div>
+          <div className="stat-value text-secondary">200</div>
+          <div className="stat-desc text-secondary invisible">31 tasks remaining</div>
+        </div>
+
+      </div>
     </main>
   );
 }

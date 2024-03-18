@@ -9,10 +9,12 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-logo": "linear-gradient(45deg, hsla(175, 79%, 63%, 1) 0%, hsla(82, 96%, 57%, 1) 100%)"
+        "gradient-logo": "linear-gradient(45deg, hsla(175, 79%, 63%, 1) 0%, hsla(82, 96%, 57%, 1) 100%)",
+        "hero-img": "url('/topography.svg')"
       },
       backgroundSize: {
-        "nav-logo": "150px"
+        "nav-logo": "150px",
+        "hero": "50%"
       }
     }
   },
