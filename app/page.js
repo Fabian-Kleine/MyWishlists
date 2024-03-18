@@ -1,5 +1,7 @@
 import { supabase } from "@/utils/supabase";
 import { ScrollText, MonitorSmartphone, Zap } from "lucide-react";
+import ViewCount from "@/components/ViewCount";
+import PageViews from "@/utils/pageviews";
 
 async function getWishlists() {
   const { data, error } = await supabase
@@ -59,11 +61,12 @@ export default async function Home() {
             <Zap height={30} width={30} />
           </div>
           <div className="stat-title">Page Views</div>
-          <div className="stat-value text-secondary">200</div>
+          <div className="stat-value text-secondary"><ViewCount /></div>
           <div className="stat-desc text-secondary invisible">31 tasks remaining</div>
         </div>
 
       </div>
+      <PageViews />
     </main>
   );
 }
