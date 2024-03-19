@@ -4,28 +4,28 @@ import { supabase } from "@/utils/supabase";
 import { useState, useEffect } from "react";
 import abbrNum from "@/utils/abbrNum";
 
-export default function DeviceCount() {
-    const [devices, setDevices] = useState(0);
+export default function UserCount() {
+    const [users, setUsers] = useState(0);
 
-    async function getDevices() {
-        const devices  = await supabase
-        .from('devices')
+    async function getUsers() {
+        const users  = await supabase
+        .from('profiles')
         .select('id');
-        const abbrDeviceNum = abbrNum(devices.data.length, 2);
-        setDevices(abbrDeviceNum);
+        const abbrUserNum = abbrNum(users.data.length, 2);
+        setUsers(abbrUserNum);
     }
 
     useEffect(() => {
-        getDevices()
+        getUsers()
         const channel = supabase
-            .channel('devices')
+            .channel('profiles')
             .on(
                 'postgres_changes',
                 {
                     event: 'INSERT',
                     schema: '*'
                 },
-                () => getDevices()
+                () => getUsers()
             )
             .subscribe()
 
@@ -34,5 +34,5 @@ export default function DeviceCount() {
         }
     }, []);
 
-    return <>{devices}</>
+    return <>{users}</>
 }

@@ -1,7 +1,7 @@
-import { ScrollText, MonitorSmartphone, Zap } from "lucide-react";
+import { ScrollText, Users, Zap } from "lucide-react";
 import ViewCount from "@/components/counters/ViewCount";
 import WishlistCount from "@/components/counters/WishlistCount";
-import DeviceCount from "@/components/counters/DeviceCount";
+import UserCount from "@/components/counters/UserCount";
 
 export default async function Home() {
 
@@ -29,10 +29,10 @@ export default async function Home() {
 
         <div className="stat">
           <div className="stat-figure text-accent">
-            <MonitorSmartphone height={30} width={30} />
+            <Users height={30} width={30} />
           </div>
-          <div className="stat-title">Registered Devices</div>
-          <div className="stat-value text-accent"><DeviceCount /></div>
+          <div className="stat-title">Registered Users</div>
+          <div className="stat-value text-accent"><UserCount /></div>
           <div className="stat-desc invisible">21% more than last month</div>
         </div>
 
