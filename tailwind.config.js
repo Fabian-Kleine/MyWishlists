@@ -15,6 +15,9 @@ module.exports = {
       backgroundSize: {
         "nav-logo": "150px",
         "hero": "50%"
+      },
+      screens: {
+        'xs': "340px"
       }
     }
   },
