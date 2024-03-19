@@ -1,9 +1,7 @@
-import { supabase } from "@/utils/supabase";
 import { ScrollText, MonitorSmartphone, Zap } from "lucide-react";
 import ViewCount from "@/components/counters/ViewCount";
 import WishlistCount from "@/components/counters/WishlistCount";
 import DeviceCount from "@/components/counters/DeviceCount";
-import PageViews from "@/utils/pageviews";
 
 export default async function Home() {
 
@@ -48,7 +46,6 @@ export default async function Home() {
         </div>
 
       </div>
-      <PageViews />
     </main>
   );
 }

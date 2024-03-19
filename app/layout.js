@@ -4,6 +4,7 @@ import "./globals.css";
 //import components
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PageViews from "@/utils/pageviews";
 
 export const nunito_init = Nunito({
   subsets: ['latin'],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
         {children}
         <Footer />
       </body>
+      <PageViews />
     </html>
   );
 }
