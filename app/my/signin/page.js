@@ -8,7 +8,7 @@ export default async function Signin({ searchParams }) {
     const unauthorizedMsg = searchParams.unauthorized == 1;
 
     return (
-        <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-center signin:px-24">
+        <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-center mobile:px-24">
             <div className="hero w-full flex justify-evenly flex-col lg:flex-row items-start">
                 <div className="hero-content flex-col">
                     <div className="text-center">

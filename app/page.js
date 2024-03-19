@@ -8,7 +8,7 @@ export default function Home({ searchParams }) {
   const signupMsg = searchParams.signup == 1;
 
   return (
-    <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-between px-24">
+    <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-between mobile:px-24">
       <div className="hero min-h-screen">
         <div className="hero-content text-center">
           <div className="max-w-md">
