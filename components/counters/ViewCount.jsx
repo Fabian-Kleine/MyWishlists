@@ -22,7 +22,7 @@ export default function ViewCount() {
             .on(
                 'postgres_changes',
                 {
-                    event: '*',
+                    event: 'UPDATE',
                     schema: '*'
                 },
                 () => getViews()

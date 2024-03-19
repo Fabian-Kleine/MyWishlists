@@ -22,7 +22,7 @@ export default function WishlistCount() {
             .on(
                 'postgres_changes',
                 {
-                    event: '*',
+                    event: 'INSERT',
                     schema: '*'
                 },
                 () => getWishlists()

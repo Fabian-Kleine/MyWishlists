@@ -22,7 +22,7 @@ export default function DeviceCount() {
             .on(
                 'postgres_changes',
                 {
-                    event: '*',
+                    event: 'INSERT',
                     schema: '*'
                 },
                 () => getDevices()
