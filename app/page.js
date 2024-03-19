@@ -1,9 +1,11 @@
-import { ScrollText, Users, Zap } from "lucide-react";
+import { ScrollText, Users, Zap, CircleCheckBig } from "lucide-react";
 import ViewCount from "@/components/counters/ViewCount";
 import WishlistCount from "@/components/counters/WishlistCount";
 import UserCount from "@/components/counters/UserCount";
 
-export default async function Home() {
+export default function Home({ searchParams }) {
+  const signinMsg = searchParams.signin == 1;
+  const signupMsg = searchParams.signup == 1;
 
   return (
     <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-between px-24">
@@ -46,6 +48,34 @@ export default async function Home() {
         </div>
 
       </div>
+      {signinMsg && (
+        <dialog className="modal" open>
+          <div className="modal-box flex justify-left items-center gap-5">
+            <CircleCheckBig height={60} width={60} className="text-primary" />
+            <div>
+              <h3 className="font-bold text-lg">Signed in!</h3>
+              <p className="py-4">You have successfully been signed in!</p>
+            </div>
+          </div>
+          <form method="dialog" className="modal-backdrop bg-black bg-opacity-40">
+            <button>close</button>
+          </form>
+        </dialog>
+      )}
+      {signupMsg && (
+        <dialog className="modal" open>
+          <div className="modal-box flex justify-left items-center gap-5">
+            <CircleCheckBig height={60} width={60} className="text-success" />
+            <div>
+              <h3 className="font-bold text-lg">Signed up!</h3>
+              <p className="py-4">You have successfully been signed up!</p>
+            </div>
+          </div>
+          <form method="dialog" className="modal-backdrop bg-black bg-opacity-40">
+            <button>close</button>
+          </form>
+        </dialog>
+      )}
     </main>
   );
 }
