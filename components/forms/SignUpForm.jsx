@@ -57,7 +57,7 @@ export default function SignUpForm() {
                 <span className="text-red-600">{errorMsg}</span>
             </div>
             <div className="form-control mt-6">
-                <button disabled={isLoading} role="submit" className="btn btn-success">{isLoading ? <><span className="loading loading-spinner loading-sm"></span> Loading...</> : "Sign up"}</button>
+                <button disabled={isLoading} type="submit" className="btn btn-success">{isLoading ? <><span className="loading loading-spinner loading-sm"></span> Loading...</> : "Sign up"}</button>
             </div>
         </form>
     )

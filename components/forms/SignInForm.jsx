@@ -53,7 +53,7 @@ export default function SignInForm() {
                 <span className="text-red-600">{errorMsg}</span>
             </div>
             <div className="form-control mt-6">
-                <button disabled={isLoading} role="submit" className="btn btn-primary">{isLoading ? <><span className="loading loading-spinner loading-sm"></span> Loading...</> : "Sign in"}</button>
+                <button disabled={isLoading} type="submit" className="btn btn-primary">{isLoading ? <><span className="loading loading-spinner loading-sm"></span> Loading...</> : "Sign in"}</button>
             </div>
         </form>
     )
