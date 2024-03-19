@@ -2,19 +2,21 @@
 
 import { supabase } from "@/utils/supabase";
 import { useState, useEffect } from "react";
-
-async function getViews() {
-    const views  = await supabase
-    .from('statistics')
-    .select('views');
-    return views.data[0].views;
-}
+import abbrNum from "@/utils/abbrNum";
 
 export default function ViewCount() {
     const [views, setViews] = useState(0);
 
+    async function getViews() {
+        const views  = await supabase
+        .from('statistics')
+        .select('views');
+        const abbrViewsNum = abbrNum(views.data[0].views, 2);
+        setViews(abbrViewsNum);
+    }
+
     useEffect(() => {
-        setViews(getViews())
+        getViews()
         const channel = supabase
             .channel('statistics')
             .on(
@@ -23,7 +25,7 @@ export default function ViewCount() {
                     event: '*',
                     schema: '*'
                 },
-                payload => setViews(getViews())
+                () => getViews()
             )
             .subscribe()
 

@@ -2,19 +2,21 @@
 
 import { supabase } from "@/utils/supabase";
 import { useState, useEffect } from "react";
-
-async function getWishlists() {
-    const wishlists  = await supabase
-    .from('wishlists')
-    .select('id');
-    return wishlists.data.length;
-}
+import abbrNum from "@/utils/abbrNum";
 
 export default function WishlistCount() {
     const [wishlists, setWishlists] = useState(0);
 
+    async function getWishlists() {
+        const wishlists  = await supabase
+        .from('wishlists')
+        .select('id');
+        const abbrWishlistNumber = abbrNum(wishlists.data.length, 2);
+        setWishlists(abbrWishlistNumber);
+    }
+
     useEffect(() => {
-        setWishlists(getWishlists())
+        getWishlists()
         const channel = supabase
             .channel('wishlists')
             .on(
@@ -23,9 +25,9 @@ export default function WishlistCount() {
                     event: '*',
                     schema: '*'
                 },
-                () => setWishlists(getWishlists())
+                () => getWishlists()
             )
-            .subscribe()
+            .subscribe();  
 
         return () => {
             supabase.removeChannel(channel)
