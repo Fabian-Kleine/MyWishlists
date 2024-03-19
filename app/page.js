@@ -2,6 +2,7 @@ import { ScrollText, Users, Zap, CircleCheckBig } from "lucide-react";
 import ViewCount from "@/components/counters/ViewCount";
 import WishlistCount from "@/components/counters/WishlistCount";
 import UserCount from "@/components/counters/UserCount";
+import Link from "next/link";
 
 export default function Home({ searchParams }) {
   const signinMsg = searchParams.signin == 1;
@@ -14,7 +15,7 @@ export default function Home({ searchParams }) {
           <div className="max-w-md">
             <h1 className="text-5xl font-bold bg-gradient-logo text-transparent bg-clip-text leading-snug">My Wishlists</h1>
             <h2 className="text-lg py-6">Create Wishlists and share them</h2>
-            <button className="btn btn-accent">Create Wishlist</button>
+            <Link href={'/list/create'} className="btn btn-accent">Create Wishlist</Link>
           </div>
         </div>
       </div>
