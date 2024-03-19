@@ -19,7 +19,7 @@ export default function Home({ searchParams }) {
         </div>
       </div>
       <h2 className="text-2xl font-bold my-3">Live Page Stats</h2>
-      <div className="stats shadow mb-24">
+      <div className="stats stats-vertical md:stats-horizontal shadow mb-24">
         <div className="stat">
           <div className="stat-figure text-primary">
             <ScrollText height={30} width={30} />

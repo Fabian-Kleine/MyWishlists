@@ -17,7 +17,8 @@ module.exports = {
         "hero": "50%"
       },
       screens: {
-        'xs': "340px"
+        'xs': "340px",
+        "signin": "550px"
       }
     }
   },
