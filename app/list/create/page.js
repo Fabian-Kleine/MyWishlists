@@ -1,10 +1,11 @@
 "use client"
 
+import Link from "next/link";
 import CheckLoggedIn from "@/utils/checkLoggedIn";
 import { useSearchParams, useRouter } from "next/navigation";
 import { generateUID } from "@/utils/generatID";
 import { useState, useEffect } from "react";
-import { PackagePlus, Share2, Link, Share, EllipsisVertical, Pen, Trash2, ShoppingCart } from "lucide-react";
+import { PackagePlus, Share2, LinkIcon, Share, EllipsisVertical, Pen, Trash2, ShoppingCart } from "lucide-react";
 import { supabase } from "@/utils/supabase";
 
 export default function CreateList() {
@@ -33,49 +34,58 @@ export default function CreateList() {
     useEffect(() => {
 
         async function createWishlist() {
-            await supabase
+            const { error } = await supabase
                 .from("wishlists")
                 .insert({ list_id });
+
+            if(error) console.error(error);
         }
 
         async function getWishlist() {
-            const { data } = await supabase
+            const { data, error } = await supabase
                 .from("wishlists")
                 .select("*")
                 .eq("list_id", list_id)
 
-            setWishlist(data[0]);
-            setDeadlineActive(data[0].has_deadline)
+            if(error) {
+                console.error(error);
+                return;
+            };
 
             if (!data.length) {
                 createWishlist()
+            } else {
+                setWishlist(data[0]);
+                setDeadlineActive(data[0].has_deadline)
             }
         }
 
         if (!list_id) {
             const id = generateUID();
-            router.push('?list_id='+id);
+            router.push('?list_id=' + id);
         } else {
             getWishlist();
         }
 
     }, [searchParams]);
 
-    async function handleAddWish() {
-        //save wishlist
-        await supabase
-            .from("wishlists")
-            .update({ 
-                title,
-                description,
-                has_deadline: deadlineActive,
-                deadline: date
-            })
-            .eq("list_id", list_id);
+    useEffect(() => {
+        async function saveWish() {
+            const updateData = {
+                ...(title ? {title} : {}),
+                ...(description ? {description} : {}),
+                ...{has_deadline: deadlineActive},
+                ...(date ? {deadline: date} : {}),
+            }
+            const { error } = await supabase
+                .from("wishlists")
+                .update(updateData)
+                .eq("list_id", list_id);
 
-        //reroute
-        router.push(`/list/create/addwish?list_id=${list_id}`);
-    }
+            if(error) console.error(error);
+        }
+        saveWish();
+    }, [title, description, deadlineActive, date]);
 
     return (
         <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-between mobile:px-24">
@@ -102,7 +112,7 @@ export default function CreateList() {
                             <input defaultValue={wishlist?.deadline} onChange={(e) => setDate(e.target.value)} disabled={!deadlineActive} id="date" name="date" type="date" className="input input-bordered w-full" />
                         </label>
                         <div className="flex justify-between flex-wrap items-center gap-5 mt-3">
-                            <button onClick={handleAddWish} className="btn btn-primary px-24" type="button"><PackagePlus />Add Wish</button>
+                            <Link href={`/list/create/addwish?list_id=${list_id}`} className="btn btn-primary px-24" type="button"><PackagePlus />Add Wish</Link>
                             <div className="tooltip" data-tip="Share Wishlist">
                                 <button type="button" onClick={() => document.getElementById('shareModal').showModal()} className="btn btn-ghost btn-circle"><Share2 /></button>
                             </div>
@@ -144,7 +154,7 @@ export default function CreateList() {
                         <div className="join">
                             <input disabled id="title" name="title" type="text" value={wishlist_url} className="input input-bordered w-full join-item disabled:cursor-text" />
                             <div className="tooltip" data-tip="Copy Link to Clipboard">
-                                <button onClick={() => navigator.clipboard.writeText(wishlist_url)} className="btn join-item"><Link /></button>
+                                <button onClick={() => navigator.clipboard.writeText(wishlist_url)} className="btn join-item"><LinkIcon /></button>
                             </div>
                         </div>
                     </label>
