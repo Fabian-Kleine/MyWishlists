@@ -25,7 +25,7 @@ export default function Home({ searchParams }) {
           <div className="stat-figure text-primary">
             <ScrollText height={30} width={30} />
           </div>
-          <div className="stat-title">Wishlist</div>
+          <div className="stat-title">Wishlists</div>
           <div className="stat-value text-primary"><WishlistCount /></div>
           <div className="stat-desc invisible">21% more than last month</div>
         </div>
