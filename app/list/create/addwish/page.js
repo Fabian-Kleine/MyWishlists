@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
 import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
+import Link from "next/link";
 
 export default function AddWish() {
     const searchParams = useSearchParams();
@@ -130,7 +131,7 @@ export default function AddWish() {
                                 <span className="label-text text-lg">Price {isLoading && <span className="loading loading-dots loading-sm relative top-2"></span>}</span>
                             </div>
                             <div className="join">
-                                <input disabled={isLoading} value={parseFloat(price.replace(",", "."))} onChange={(e) => setPrice(e.target.value)} id="price" name="price" type="number" placeholder="Price" className="input input-bordered w-full join-item" />
+                                <input disabled={isLoading} value={price} onChange={(e) => setPrice(e.target.value)} id="price" name="price" type="text" placeholder="Price" className="input input-bordered w-full join-item" />
                                 <select disabled={isLoading} defaultValue={"€"} onChange={(e) => setCurrency(e.target.value)} className="select select-bordered w-1/3 max-w-xs join-item">
                                     <option value={"€"} defaultValue>€ (Euro)</option>
                                     <option value={"$"}>$ (Dollar)</option>
@@ -142,7 +143,10 @@ export default function AddWish() {
                                 <img className="w-1/2" src={productImage} alt="Product Image" />
                                 <span>Product Image</span>
                             </div>
-                            <button onClick={handleWishSave} disabled={isLoading} className="btn btn-primary px-12">{isLoading ? <><span className="loading loading-spinner"></span>Loading</> : <><Save className="mr-1" />Save</>}</button>
+                            <div className="flex items-center gap-2">
+                                <Link href={'/list/create?list_id='+list_id} className="btn btn-error">Cancel</Link>
+                                <button onClick={handleWishSave} disabled={isLoading} className="btn btn-primary px-12">{isLoading ? <><span className="loading loading-spinner"></span>Loading</> : <><Save className="mr-1" />Save</>}</button>
+                            </div>
                         </div>
                     </div>
                 </div>
