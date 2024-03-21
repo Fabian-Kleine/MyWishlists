@@ -21,7 +21,8 @@ export async function POST(req) {
         });
         const webpage = await axios.get(url);
         const $ = cheerio.load(webpage.data);
-        const image = $(webshopdata.imageQuery).first().attr('src');
+        let image = $(webshopdata.imageQuery).first().attr('src');
+        if (webshopdata.sourceImage) image = $(webshopdata.imageQuery).first().attr('srcset');
         const title = !body.title ? $(webshopdata.titleQuery).first().text().trim() : body.title;
         let price = !body.price ? $(webshopdata.priceQuery).first().text().trim() : body.price;
         if (webshopdata.composedPrice && price != body.price) {
