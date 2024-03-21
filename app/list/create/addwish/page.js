@@ -1,6 +1,6 @@
 "use client"
 
-import { Save } from "lucide-react";
+import { Save, CircleHelp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
@@ -93,7 +93,7 @@ export default function AddWish() {
             return;
         }
         setIsLoading(false);
-        router.push('/list/create?list_id='+list_id);
+        router.push('/list/create?list_id=' + list_id);
     }
 
     return (
@@ -104,7 +104,12 @@ export default function AddWish() {
                     <div className="flex flex-col gap-2">
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text text-lg">Link {isLoading && <span className="loading loading-dots loading-sm relative top-2"></span>}</span>
+                                <span className="label-text text-lg">Link
+                                    {isLoading && <span className="loading loading-dots loading-sm relative top-2"></span>}
+                                    <div className="tooltip" data-tip="See supported websites">
+                                        <button onClick={() => document.getElementById('supportedWebsitesModal').showModal()} aria-label="See supported websites" className="btn btn-ghost btn-circle text-info btn-xs"><CircleHelp className="h-4" /></button>
+                                    </div>
+                                </span>
                             </div>
                             <input disabled={isLoading} onBlur={(e) => setLink(e.target.value)} id="link" name="link" type="url" placeholder="https://some.shop.example/your-product" className="input input-bordered w-full" />
                         </label>
@@ -144,6 +149,49 @@ export default function AddWish() {
             </div>
             <span>{errorMsg}</span>
             <ErrorModal errorText={errorMsg} />
+            <dialog id="supportedWebsitesModal" className="modal">
+                <div className="modal-box">
+                    <form method="dialog">
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <h3 className="font-bold text-lg">Supported Websites</h3>
+                    <p className="py-4">Images, Titles and Prices can be fetched from these websites:</p>
+                    <div className="flex justify-evenly flex-wrap gap-3">
+                        <a href="https://amazon.com" target="_blank" className="card bg-base-100 shadow-xl image-full">
+                            <figure className="h-32 w-56 flex justify-center items-center">
+                                <img className="object-contain w-full h-full" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" />
+                            </figure>
+                            <div className="card-body p-0 px-12 flex justify-start items-center">
+                                <h2 className="card-title">Amazon</h2>
+                            </div>
+                        </a>
+                        <a href="https://ebay.com" target="_blank" className="card bg-base-100 shadow-xl image-full">
+                            <figure className="h-32 w-56 flex justify-center items-center">
+                                <img className="object-contain w-full h-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2560px-EBay_logo.svg.png" alt="eBay" />
+                            </figure>
+                            <div className="card-body p-0 px-12 flex justify-start items-center">
+                                <h2 className="card-title">eBay</h2>
+                            </div>
+                        </a>
+                        <a href="https://kleinanzeigen.de" target="_blank" className="card bg-base-100 shadow-xl image-full">
+                            <figure className="h-32 w-56 flex justify-center items-center">
+                                <img className="object-contain w-full h-full" src="https://themen.kleinanzeigen.de/thumbnails/75262aff9fb768361164bfe90d87fceaed5f60d7/sharing.9dd29df345d7.png" alt="Kleinanzeigen" />
+                            </figure>
+                            <div className="card-body p-0 px-12 flex justify-start items-center">
+                                <h2 className="card-title">Kleinanzeigen</h2>
+                            </div>
+                        </a>
+                        <a href="https://geizhals.de" target="_blank" className="card bg-base-100 shadow-xl image-full">
+                            <figure className="h-32 w-56 flex justify-center items-center">
+                                <img className="object-contain w-full h-full" src="https://gzhls.at/b/favicons/gh/gh-ogimage.png?ogircp" alt="Geizhals" />
+                            </figure>
+                            <div className="card-body p-0 px-12 flex justify-start items-center">
+                                <h2 className="card-title">Geizhals</h2>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </dialog>
         </main>
     )
 }
