@@ -87,6 +87,36 @@ export default function CreateList() {
         saveWish();
     }, [title, description, deadlineActive, date]);
 
+    async function handleDeleteProduct(id) {
+        const { data: { products }, error } = await supabase
+            .from("wishlists")
+            .select("products")
+            .eq("list_id", list_id)
+            .single();
+
+        if (error) {
+            console.error(error);
+            return;
+        }
+
+        let updatedProducts = products;
+
+        updatedProducts.forEach((product, index) => {
+            if (product.id == id) {
+                updatedProducts.splice(index, 1);
+            }
+        });
+
+        const {data: wishlistData, error: updateError} = await supabase
+            .from("wishlists")
+            .update({ products: updatedProducts})
+            .eq("list_id", list_id)
+            .single()
+            .select("*");
+
+        setWishlist(wishlistData);
+    }
+
     return (
         <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-between mobile:px-24">
             <div className="py-24 lg:px-24 w-full flex flex-col items-center">
@@ -139,8 +169,8 @@ export default function CreateList() {
                                         <div className="dropdown dropdown-top">
                                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle m-1"><EllipsisVertical /></div>
                                             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                                <li><a><Pen height={15} />Edit</a></li>
-                                                <li><a><Trash2 height={15} />Remove</a></li>
+                                                <li><button><Pen height={15} />Edit</button></li>
+                                                <li><button onClick={() => handleDeleteProduct(product.id)}><Trash2 height={15} />Remove</button></li>
                                                 {product.link ? (
                                                     <li><a href={product.link} target="_blank"><ShoppingCart height={15} />View Product</a></li>
                                                 ) : <></>}

@@ -70,6 +70,7 @@ export default function AddWish() {
         }
 
         let updatedProducts = [{
+            id: products?.length + 1 || 1,
             title,
             price,
             link,
