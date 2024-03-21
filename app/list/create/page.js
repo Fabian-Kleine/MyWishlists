@@ -5,7 +5,7 @@ import CheckLoggedIn from "@/utils/checkLoggedIn";
 import { useSearchParams, useRouter } from "next/navigation";
 import { generateUID } from "@/utils/generatID";
 import { useState, useEffect } from "react";
-import { PackagePlus, Share2, LinkIcon, Share, EllipsisVertical, Pen, Trash2, ShoppingCart } from "lucide-react";
+import { PackagePlus, Share2, LinkIcon, Share, EllipsisVertical, Pen, Trash2, ShoppingCart, ImageOff } from "lucide-react";
 import { supabase } from "@/utils/supabase";
 
 export default function CreateList() {
@@ -38,7 +38,7 @@ export default function CreateList() {
                 .from("wishlists")
                 .insert({ list_id });
 
-            if(error) console.error(error);
+            if (error) console.error(error);
         }
 
         async function getWishlist() {
@@ -47,7 +47,7 @@ export default function CreateList() {
                 .select("*")
                 .eq("list_id", list_id)
 
-            if(error) {
+            if (error) {
                 console.error(error);
                 return;
             };
@@ -72,17 +72,17 @@ export default function CreateList() {
     useEffect(() => {
         async function saveWish() {
             const updateData = {
-                ...(title ? {title} : {}),
-                ...(description ? {description} : {}),
-                ...{has_deadline: deadlineActive},
-                ...(date ? {deadline: date} : {}),
+                ...(title ? { title } : {}),
+                ...(description ? { description } : {}),
+                ...{ has_deadline: deadlineActive },
+                ...(date ? { deadline: date } : {}),
             }
             const { error } = await supabase
                 .from("wishlists")
                 .update(updateData)
                 .eq("list_id", list_id);
 
-            if(error) console.error(error);
+            if (error) console.error(error);
         }
         saveWish();
     }, [title, description, deadlineActive, date]);
@@ -97,19 +97,19 @@ export default function CreateList() {
                             <div className="label">
                                 <span className="label-text text-lg">Wishlist Title</span>
                             </div>
-                            <input defaultValue={wishlist?.title} onChange={(e) => setTitle(e.target.value)} id="title" name="title" type="text" placeholder="Wishlist Title" className="input input-bordered input-lg w-full" />
+                            <input defaultValue={wishlist?.title} onBlur={(e) => setTitle(e.target.value)} id="title" name="title" type="text" placeholder="Wishlist Title" className="input input-bordered input-lg w-full" />
                         </label>
                         <label className="form-control">
                             <div className="label">
                                 <span className="label-text">Short Description</span>
                             </div>
-                            <textarea defaultValue={wishlist?.description} onChange={(e) => setDescription(e.target.value)} name="description" id="description" className="textarea textarea-bordered h-24" placeholder="Description"></textarea>
+                            <textarea defaultValue={wishlist?.description} onBlur={(e) => setDescription(e.target.value)} name="description" id="description" className="textarea textarea-bordered h-24" placeholder="Description"></textarea>
                         </label>
                         <label className="form-control">
                             <div className="label">
-                                <span className="label-text flex items-center gap-2"><input defaultChecked={!deadlineActive} type="checkbox" className="toggle toggle-sm" onChange={(e) => setDeadlineActive(e.target.checked)} />Deadline<span className="badge badge-sm items-end">optional</span></span>
+                                <span className="label-text flex items-center gap-2"><input defaultChecked={deadlineActive} type="checkbox" className="toggle toggle-sm" onChange={(e) => setDeadlineActive(e.target.checked)} />Deadline<span className="badge badge-sm items-end">optional</span></span>
                             </div>
-                            <input defaultValue={wishlist?.deadline} onChange={(e) => setDate(e.target.value)} disabled={!deadlineActive} id="date" name="date" type="date" className="input input-bordered w-full" />
+                            <input defaultValue={wishlist?.deadline} onBlur={(e) => setDate(e.target.value)} disabled={!deadlineActive} id="date" name="date" type="date" className="input input-bordered w-full" />
                         </label>
                         <div className="flex justify-between flex-wrap items-center gap-5 mt-3">
                             <Link href={`/list/create/addwish?list_id=${list_id}`} className="btn btn-primary px-24" type="button"><PackagePlus />Add Wish</Link>
@@ -120,25 +120,36 @@ export default function CreateList() {
                     </div>
                 </div>
                 <div className="flex flex-wrap justify-center w-full gap-2 mt-24">
-                    {Array.from({ length: 7 }).map(() =>
-                        <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                            <figure><img src="https://placehold.co/460x250" alt="Product Image" /></figure>
-                            <div className="card-body">
-                                <h2 className="card-title text-2xl">Product</h2>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-xl font-bold text-accent">Price: 27,50 €</span>
-                                    <div className="dropdown dropdown-top">
-                                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle m-1"><EllipsisVertical /></div>
-                                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                            <li><a><Pen height={15} />Edit</a></li>
-                                            <li><a><Trash2 height={15} />Remove</a></li>
-                                            <li><a><ShoppingCart height={15} />View Product</a></li>
-                                        </ul>
+                    {wishlist?.products?.length ?
+                        wishlist.products.map((product, index) =>
+                            <div key={index} className="card card-compact w-96 bg-base-100 shadow-xl">
+                                <figure className="h-[250px] flex justify-center items-center">
+                                    {product.image != null ? (
+                                        <img className="object-cover" src={product.image} alt="Product Image" />
+                                    ) : (
+                                        <ImageOff height={90} width={90} className="object-cover" />
+                                    )}
+                                </figure>
+                                <div className="card-body">
+                                    <h2 className="card-title text-2xl line-clamp-2">{product.title}</h2>
+                                    <div className={`flex ${product.price ? "justify-between" : "justify-end"} items-center`}>
+                                        {product.price ? (
+                                            <span className="text-xl font-bold text-accent">Price: {product.price} {product.currency}</span>
+                                        ) : <></>}
+                                        <div className="dropdown dropdown-top">
+                                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle m-1"><EllipsisVertical /></div>
+                                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                                <li><a><Pen height={15} />Edit</a></li>
+                                                <li><a><Trash2 height={15} />Remove</a></li>
+                                                {product.link ? (
+                                                    <li><a href={product.link} target="_blank"><ShoppingCart height={15} />View Product</a></li>
+                                                ) : <></>}
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
+                        ) : <></>}
                 </div>
             </div>
             <dialog id="shareModal" className="modal">
