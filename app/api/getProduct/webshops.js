@@ -20,13 +20,6 @@ const webshops = [
         titleQuery: "#viewad-title",
         replacePriceText: true,
         priceQuery: "#viewad-price",
-    },
-    {
-        hostname: "geizhals",
-        imageQuery: ".swiper-slide__image",
-        titleQuery: ".variant__header__headline",
-        replacePriceText: true,
-        priceQuery: ".gh_price",
     }
 ]
 

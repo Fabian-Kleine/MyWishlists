@@ -186,14 +186,6 @@ export default function AddWish() {
                                 <h2 className="card-title">Kleinanzeigen</h2>
                             </div>
                         </a>
-                        <a href="https://geizhals.de" target="_blank" className="card bg-base-100 shadow-xl image-full">
-                            <figure className="h-32 w-56 flex justify-center items-center">
-                                <img className="object-contain w-full h-full" src="https://gzhls.at/b/favicons/gh/gh-ogimage.png?ogircp" alt="Geizhals" />
-                            </figure>
-                            <div className="card-body p-0 px-12 flex justify-start items-center">
-                                <h2 className="card-title">Geizhals</h2>
-                            </div>
-                        </a>
                     </div>
                 </div>
             </dialog>
