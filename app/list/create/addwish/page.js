@@ -12,6 +12,8 @@ export default function AddWish() {
     const router = useRouter();
 
     const list_id = searchParams.get("list_id");
+    const mode = searchParams.get("mode");
+    const product_id = searchParams.get("product_id");
 
     const [link, setLink] = useState("");
     const [title, setTitle] = useState("");
@@ -44,11 +46,40 @@ export default function AddWish() {
             setIsLoading(false);
         }
         fetchProduct();
-    }, [link]);
+
+        async function getProducts() {
+            setIsLoading(true);
+            const { data: { products }, error } = await supabase
+            .from("wishlists")
+            .select("products")
+            .eq("list_id", list_id)
+            .single();
+
+            if (error) {
+                console.error(error);
+                setErrorMsg("An error occured while fetching your wish to edit it.");
+                ShowErrorModal();
+                setIsLoading(false);
+                return;
+            }
+            const product = products.find((p) => {
+                return p.id == product_id;
+            });
+            setProductImage(product.image);
+            setTitle(product.title);
+            setPrice(product.price);
+            setAnnotation(product.annotation);
+            setCurrency(product.currency);
+            setLink(product.link);
+            setIsLoading(false);
+        }
+        if (mode == "edit") {
+            getProducts()
+        }
+    }, [link, mode]);
 
     async function handleWishSave() {
         setIsLoading(true);
-        setErrorMsg("");
         if (!title) {
             setErrorMsg("Title is required!");
             ShowErrorModal();
@@ -79,7 +110,19 @@ export default function AddWish() {
             image: productImage
         }];
 
-        if (products) updatedProducts = [...products, ...updatedProducts];
+        if (mode == "edit") {
+            let oldProducts = products;
+
+            oldProducts.forEach((product, index) => {
+                if (product.id == product_id) {
+                    oldProducts.splice(index, 1);
+                }
+            });
+
+            updatedProducts = [...oldProducts, ...updatedProducts];
+        }
+
+        if (products && mode != "edit") updatedProducts = [...products, ...updatedProducts];
 
         const { error: saveError } = await supabase
             .from("wishlists")
@@ -113,7 +156,7 @@ export default function AddWish() {
                                     </div>
                                 </span>
                             </div>
-                            <input disabled={isLoading} onBlur={(e) => setLink(e.target.value)} id="link" name="link" type="url" placeholder="https://some.shop.example/your-product" className="input input-bordered w-full" />
+                            <input defaultValue={link} disabled={isLoading} onBlur={(e) => setLink(e.target.value)} id="link" name="link" type="url" placeholder="https://some.shop.example/your-product" className="input input-bordered w-full" />
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
@@ -125,7 +168,7 @@ export default function AddWish() {
                             <div className="label">
                                 <span className="label-text text-lg">Annotation</span>
                             </div>
-                            <textarea disabled={isLoading} onChange={(e) => setAnnotation(e.target.value)} name="annotation" id="annotation" className="textarea textarea-bordered h-24" placeholder="Annotation"></textarea>
+                            <textarea defaultValue={annotation} disabled={isLoading} onChange={(e) => setAnnotation(e.target.value)} name="annotation" id="annotation" className="textarea textarea-bordered h-24" placeholder="Annotation"></textarea>
                         </label>
                         <label className="form-control w-full">
                             <div className="label">

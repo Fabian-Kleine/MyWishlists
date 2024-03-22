@@ -172,7 +172,7 @@ export default function CreateList() {
                                         <div className="dropdown dropdown-top">
                                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle m-1"><EllipsisVertical /></div>
                                             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                                <li><button><Pen height={15} />Edit</button></li>
+                                                <li><Link href={`/list/create/addwish?list_id=${list_id}&mode=edit&product_id=${product.id}`}><Pen height={15} />Edit</Link></li>
                                                 <li><button onClick={() => handleDeleteProduct(product.id)}><Trash2 height={15} />Remove</button></li>
                                                 {product.link ? (
                                                     <li><a href={product.link} target="_blank"><ShoppingCart height={15} />View Product</a></li>
