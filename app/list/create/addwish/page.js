@@ -4,6 +4,7 @@ import { Save, CircleHelp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
+import CheckLoggedIn from "@/utils/checkLoggedIn";
 import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
 import Link from "next/link";
 import { generateUID } from "@/utils/generatID";
@@ -196,8 +197,8 @@ export default function AddWish() {
                     </div>
                 </div>
             </div>
-            <span>{errorMsg}</span>
             <ErrorModal errorText={errorMsg} />
+            <CheckLoggedIn redirectUrl={'/my/signin?unauthorized=1'} redirectOnValid={false} />
             <dialog id="supportedWebsitesModal" className="modal">
                 <div className="modal-box">
                     <form method="dialog">
