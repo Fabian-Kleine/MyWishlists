@@ -59,7 +59,7 @@ export default function CreateList() {
                 setErrorMsg(error.message);
                 ShowErrorModal();
                 return;
-            };
+            }
 
             if (!data.length) {
                 createWishlist()
@@ -91,7 +91,12 @@ export default function CreateList() {
                 .update(updateData)
                 .eq("list_id", list_id);
 
-            if (error) console.error(error);
+            if (error) {
+                console.error(error);
+                setErrorMsg(error.message);
+                ShowErrorModal();
+                return;
+            }
         }
         saveWish();
     }, [title, description, deadlineActive, date]);
@@ -105,6 +110,8 @@ export default function CreateList() {
 
         if (error) {
             console.error(error);
+            setErrorMsg(error.message);
+            ShowErrorModal();
             return;
         }
 
@@ -116,12 +123,19 @@ export default function CreateList() {
             }
         });
 
-        const {data: wishlistData, error: updateError} = await supabase
+        const { data: wishlistData, error: updateError } = await supabase
             .from("wishlists")
-            .update({ products: updatedProducts})
+            .update({ products: updatedProducts })
             .eq("list_id", list_id)
             .single()
             .select("*");
+
+        if (updateError) {
+            console.error(updateError);
+            setErrorMsg(updateError.message);
+            ShowErrorModal();
+            return;
+        }
 
         setWishlist(wishlistData);
     }
