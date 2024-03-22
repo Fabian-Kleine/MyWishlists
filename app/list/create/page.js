@@ -152,7 +152,7 @@ export default function CreateList() {
                 <div className="flex flex-wrap justify-center w-full gap-2 mt-24">
                     {wishlist?.products?.length ?
                         wishlist.products.map((product, index) =>
-                            <div key={index} className="card card-compact w-96 bg-base-100 shadow-xl">
+                            <div key={index} className="card card-compact w-96 bg-base-100 shadow-xl h-fit">
                                 <figure className="h-[250px] flex justify-center items-center">
                                     {product.image != null ? (
                                         <img className="object-cover" src={product.image} alt="Product Image" />
@@ -162,6 +162,9 @@ export default function CreateList() {
                                 </figure>
                                 <div className="card-body">
                                     <h2 className="card-title text-2xl line-clamp-2">{product.title}</h2>
+                                    {product.annotation ? (
+                                        <p className="line-clamp-3">{product.annotation}</p>
+                                    ) : <></>}
                                     <div className={`flex ${product.price ? "justify-between" : "justify-end"} items-center`}>
                                         {product.price ? (
                                             <span className="text-xl font-bold text-accent">Price: {product.price} {product.currency}</span>
