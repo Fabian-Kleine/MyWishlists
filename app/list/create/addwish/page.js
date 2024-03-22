@@ -6,6 +6,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
 import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
 import Link from "next/link";
+import { generateUID } from "@/utils/generatID";
 
 export default function AddWish() {
     const searchParams = useSearchParams();
@@ -101,7 +102,7 @@ export default function AddWish() {
         }
 
         let updatedProducts = [{
-            id: products?.length + 1 || 1,
+            id: generateUID(),
             title,
             price,
             link,
