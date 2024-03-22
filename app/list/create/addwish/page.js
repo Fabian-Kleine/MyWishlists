@@ -169,7 +169,7 @@ export default function AddWish() {
                             <div className="label">
                                 <span className="label-text text-lg">Annotation</span>
                             </div>
-                            <textarea defaultValue={annotation} disabled={isLoading} onChange={(e) => setAnnotation(e.target.value)} name="annotation" id="annotation" className="textarea textarea-bordered h-24" placeholder="Annotation"></textarea>
+                            <textarea defaultValue={annotation} disabled={isLoading} onBlur={(e) => setAnnotation(e.target.value)} name="annotation" id="annotation" className="textarea textarea-bordered h-24" placeholder="Annotation"></textarea>
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
