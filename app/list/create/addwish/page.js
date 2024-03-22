@@ -194,6 +194,22 @@ export default function AddWish() {
                                 <h2 className="card-title">LEGO</h2>
                             </div>
                         </a>
+                        <a href="https://zalando.com" target="_blank" className="card bg-base-100 shadow-xl image-full">
+                            <figure className="h-32 w-56 flex justify-center items-center">
+                                <img className="object-contain w-full h-full" src="https://corporate.zalando.com/sites/default/files/styles/teaser_hero_extra_small/public/media/zalando-logo.jpg?h=4b68583a&itok=Ni_XeYjZ" alt="Zalando" />
+                            </figure>
+                            <div className="card-body p-0 px-12 flex justify-start items-center">
+                                <h2 className="card-title">Zalando</h2>
+                            </div>
+                        </a>
+                        <a href="https://aboutyou.com" target="_blank" className="card bg-base-100 shadow-xl image-full">
+                            <figure className="h-32 w-56 flex justify-center items-center">
+                                <img className="object-contain w-full h-full" src="https://corporate.aboutyou.de/app/uploads/2016/09/AY_Logo.png" alt="About You" />
+                            </figure>
+                            <div className="card-body p-0 px-12 flex justify-start items-center">
+                                <h2 className="card-title">About You</h2>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </dialog>
