@@ -34,7 +34,7 @@ const webshops = [
         imageQuery: ".sDq_FX.lystZ1.FxZV-M._2Pvyxl.JT3_zV.EKabf7.mo6ZnF._1RurXL.mo6ZnF._7ZONEy",
         titleQuery: ".EKabf7.R_QwOV",
         replacePriceText: true,
-        priceQuery: ".sDq_FX._4sa1cA.FxZV-M.HlZ_Tf"
+        priceQuery: ".sDq_FX._4sa1cA"
     },
     {
         hostname: "aboutyou",
