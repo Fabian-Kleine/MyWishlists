@@ -18,7 +18,7 @@ export default function CreateList() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [date, setDate] = useState("");
-    const [deadlineActive, setDeadlineActive] = useState(false);
+    const [deadlineActive, setDeadlineActive] = useState();
     const [wishlist, setWishlist] = useState();
 
     function shareLink() {
@@ -39,6 +39,7 @@ export default function CreateList() {
                 .insert({ list_id });
 
             if (error) console.error(error);
+            setDeadlineActive(false);
         }
 
         async function getWishlist() {
@@ -137,7 +138,7 @@ export default function CreateList() {
                         </label>
                         <label className="form-control">
                             <div className="label">
-                                <span className="label-text flex items-center gap-2"><input defaultChecked={deadlineActive} type="checkbox" className="toggle toggle-sm" onChange={(e) => setDeadlineActive(e.target.checked)} />Deadline<span className="badge badge-sm items-end">optional</span></span>
+                                <span className="label-text flex items-center gap-2"><input checked={deadlineActive} type="checkbox" className="toggle toggle-sm" onChange={(e) => setDeadlineActive(e.target.checked)} />Deadline<span className="badge badge-sm items-end">optional</span></span>
                             </div>
                             <input defaultValue={wishlist?.deadline} onBlur={(e) => setDate(e.target.value)} disabled={!deadlineActive} id="date" name="date" type="date" className="input input-bordered w-full" />
                         </label>
