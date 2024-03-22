@@ -95,7 +95,7 @@ export default function AddWish() {
 
         if (error) {
             console.error(error);
-            setErrorMsg(error);
+            setErrorMsg(error.message);
             ShowErrorModal();
             setIsLoading(false);
             return;
@@ -133,7 +133,7 @@ export default function AddWish() {
 
         if (saveError) {
             console.error(saveError);
-            setErrorMsg(saveError);
+            setErrorMsg(saveError.message);
             ShowErrorModal();
             setIsLoading(false);
             return;

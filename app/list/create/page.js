@@ -7,6 +7,7 @@ import { generateUID } from "@/utils/generatID";
 import { useState, useEffect } from "react";
 import { PackagePlus, Share2, LinkIcon, Share, EllipsisVertical, Pen, Trash2, ShoppingCart, ImageOff } from "lucide-react";
 import { supabase } from "@/utils/supabase";
+import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
 
 export default function CreateList() {
     const router = useRouter();
@@ -20,6 +21,7 @@ export default function CreateList() {
     const [date, setDate] = useState("");
     const [deadlineActive, setDeadlineActive] = useState();
     const [wishlist, setWishlist] = useState();
+    const [errorMsg, setErrorMsg] = useState("");
 
     function shareLink() {
         const shareData = {
@@ -38,7 +40,11 @@ export default function CreateList() {
                 .from("wishlists")
                 .insert({ list_id });
 
-            if (error) console.error(error);
+            if (error) {
+                console.error(error);
+                setErrorMsg(error.message);
+                ShowErrorModal();
+            };
             setDeadlineActive(false);
         }
 
@@ -50,6 +56,8 @@ export default function CreateList() {
 
             if (error) {
                 console.error(error);
+                setErrorMsg(error.message);
+                ShowErrorModal();
                 return;
             };
 
@@ -209,6 +217,7 @@ export default function CreateList() {
                 </div>
             </dialog>
             <CheckLoggedIn redirectUrl={'/my/signin?unauthorized=1'} redirectOnValid={false} />
+            <ErrorModal errorText={errorMsg} />
         </main>
     )
 }
