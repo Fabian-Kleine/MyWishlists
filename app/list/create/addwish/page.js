@@ -102,7 +102,7 @@ export default function AddWish() {
         }
 
         let updatedProducts = [{
-            id: generateUID(),
+            id: product_id || generateUID(),
             title,
             price,
             link,
