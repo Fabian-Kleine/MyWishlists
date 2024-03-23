@@ -22,6 +22,7 @@ export default function SignInForm() {
 
         if (error) {
             setErrorMsg("An error has occured: " + error.message);
+            setIsLoading(false);
             return;
         }
 
