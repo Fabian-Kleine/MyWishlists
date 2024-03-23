@@ -157,7 +157,7 @@ export default function CreateList() {
                         <div className="flex justify-between flex-wrap items-center gap-5 mt-3">
                             <Link href={`/list/create/addwish?list_id=${list_id}`} className="btn btn-primary px-24" type="button"><PackagePlus />Add Wish</Link>
                             <div className="tooltip" data-tip="Share Wishlist">
-                                <button type="button" onClick={ShowShareModal} className="btn btn-ghost btn-circle"><Share2 /></button>
+                                <button type="button" onClick={() => ShowShareModal()} className="btn btn-ghost btn-circle"><Share2 /></button>
                             </div>
                         </div>
                     </div>
