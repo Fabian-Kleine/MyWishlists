@@ -21,7 +21,7 @@ export default function SignUpForm() {
         });
 
         if (error) {
-            setErrorMsg("An error has occured: " + error);
+            setErrorMsg("An error has occured: " + error.message);
             return;
         }
 

@@ -21,12 +21,11 @@ export default function SignInForm() {
         });
 
         if (error) {
-            setErrorMsg("An error has occured: " + error);
+            setErrorMsg("An error has occured: " + error.message);
             return;
         }
 
         const { data: { session } } = await supabase.auth.getSession();
-        console.log(session)
 
         setIsLoading(false);
         router.replace('/?signin=1');
