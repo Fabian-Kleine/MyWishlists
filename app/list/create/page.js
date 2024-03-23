@@ -5,7 +5,7 @@ import CheckLoggedIn from "@/utils/checkLoggedIn";
 import { useSearchParams, useRouter } from "next/navigation";
 import { generateUID } from "@/utils/generatID";
 import { useState, useEffect } from "react";
-import { PackagePlus, Share2, LinkIcon, Share, EllipsisVertical, Pen, Trash2, ShoppingCart, ImageOff } from "lucide-react";
+import { PackagePlus, Share2, EllipsisVertical, Pencil, Trash2, ShoppingCart, ImageOff } from "lucide-react";
 import { supabase } from "@/utils/supabase";
 import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
 import ShareModal, { ShowShareModal } from "@/components/modals/ShareModal";
@@ -185,7 +185,7 @@ export default function CreateList() {
                                         <div className="dropdown dropdown-top">
                                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle m-1"><EllipsisVertical /></div>
                                             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                                <li><Link href={`/list/create/addwish?list_id=${list_id}&mode=edit&product_id=${product.id}`}><Pen height={15} />Edit</Link></li>
+                                                <li><Link href={`/list/create/addwish?list_id=${list_id}&mode=edit&product_id=${product.id}`}><Pencil height={15} />Edit</Link></li>
                                                 <li><button onClick={() => handleDeleteProduct(product.id)}><Trash2 height={15} />Remove</button></li>
                                                 {product.link ? (
                                                     <li><a href={product.link} target="_blank"><ShoppingCart height={15} />View Product</a></li>
