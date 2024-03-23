@@ -8,13 +8,13 @@ import { useState, useEffect } from "react";
 import { PackagePlus, Share2, LinkIcon, Share, EllipsisVertical, Pen, Trash2, ShoppingCart, ImageOff } from "lucide-react";
 import { supabase } from "@/utils/supabase";
 import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
+import ShareModal, { ShowShareModal } from "@/components/modals/ShareModal";
 
 export default function CreateList() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
     const list_id = searchParams.get("list_id");
-    const wishlist_url = "https://mywishlists.fabian-kleine.dev/list/" + list_id;
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -22,16 +22,6 @@ export default function CreateList() {
     const [deadlineActive, setDeadlineActive] = useState();
     const [wishlist, setWishlist] = useState();
     const [errorMsg, setErrorMsg] = useState("");
-
-    function shareLink() {
-        const shareData = {
-            title,
-            text: description,
-            url: wishlist_url
-        }
-
-        navigator.share(shareData);
-    }
 
     useEffect(() => {
 
@@ -167,7 +157,7 @@ export default function CreateList() {
                         <div className="flex justify-between flex-wrap items-center gap-5 mt-3">
                             <Link href={`/list/create/addwish?list_id=${list_id}`} className="btn btn-primary px-24" type="button"><PackagePlus />Add Wish</Link>
                             <div className="tooltip" data-tip="Share Wishlist">
-                                <button type="button" onClick={() => document.getElementById('shareModal').showModal()} className="btn btn-ghost btn-circle"><Share2 /></button>
+                                <button type="button" onClick={ShowShareModal} className="btn btn-ghost btn-circle"><Share2 /></button>
                             </div>
                         </div>
                     </div>
@@ -208,30 +198,9 @@ export default function CreateList() {
                         ) : <></>}
                 </div>
             </div>
-            <dialog id="shareModal" className="modal">
-                <div className="modal-box overflow-visible">
-                    <form method="dialog">
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                    </form>
-                    <h3 className="font-bold text-lg">Share this Wishlist</h3>
-                    <label className="form-control w-full">
-                        <div className="label">
-                            <span className="label-text">Wishlist Link</span>
-                        </div>
-                        <div className="join">
-                            <input disabled id="title" name="title" type="text" value={wishlist_url} className="input input-bordered w-full join-item disabled:cursor-text" />
-                            <div className="tooltip" data-tip="Copy Link to Clipboard">
-                                <button onClick={() => navigator.clipboard.writeText(wishlist_url)} className="btn join-item"><LinkIcon /></button>
-                            </div>
-                        </div>
-                    </label>
-                    <div className="form-control mt-5">
-                        <button onClick={shareLink} className="btn"><Share height={20} />Share Link</button>
-                    </div>
-                </div>
-            </dialog>
             <CheckLoggedIn redirectUrl={'/my/signin?unauthorized=1'} redirectOnValid={false} />
             <ErrorModal errorText={errorMsg} />
+            <ShareModal list_id={list_id} title={title} text={description} />
         </main>
     )
 }
