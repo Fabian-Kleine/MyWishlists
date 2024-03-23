@@ -44,5 +44,9 @@ export default function ShareModal({ list_id, title, text, modalId }) {
 
 export function ShowShareModal(modalId) {
     modalId = modalId ? modalId : "shareModal";
-    document.getElementById('shareModal').showModal();
+    document.getElementById(modalId).showModal();
+}
+
+export function ShowShareModalButton({ modalId, children, className }) {
+    return <button className={className} onClick={() => ShowShareModal(modalId)}>{children}</button>
 }
