@@ -1,7 +1,7 @@
 "use client"
 import {Share, LinkIcon} from "lucide-react";
 
-export default function ShareModal({ list_id, title, text }) {
+export default function ShareModal({ list_id, title, text, modalId }) {
     const wishlist_url = "https://mywishlists.fabian-kleine.dev/list/" + list_id;
 
     function shareLink() {
@@ -14,8 +14,10 @@ export default function ShareModal({ list_id, title, text }) {
         navigator.share(shareData);
     }
 
+    modalId = modalId ? modalId : "shareModal";
+
     return (
-        <dialog id="shareModal" className="modal">
+        <dialog id={modalId} className="modal">
             <div className="modal-box overflow-visible">
                 <form method="dialog">
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -40,6 +42,7 @@ export default function ShareModal({ list_id, title, text }) {
     )
 }
 
-export function ShowShareModal() {
+export function ShowShareModal(modalId) {
+    modalId = modalId ? modalId : "shareModal";
     document.getElementById('shareModal').showModal();
 }
