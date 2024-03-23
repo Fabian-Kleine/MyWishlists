@@ -4,6 +4,7 @@ import "./globals.css";
 //import components
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import UpdateUserCookie from "@/components/UpdateUserCookie";
 import PageViews from "@/utils/pageviews";
 
 export const nunito_init = Nunito({
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
         <Footer />
       </body>
       <PageViews />
+      <UpdateUserCookie />
     </html>
   );
 }
