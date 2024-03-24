@@ -12,14 +12,11 @@ async function getWishlist(list_id) {
 
     if (error) throw new Error(error);
 
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return wishlist;
 }
 
 export default async function Wishlist({ params: { listid } }) {
     const wishlist = await getWishlist(listid);
-    console.log(wishlist);
 
     return (
         <>
