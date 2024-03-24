@@ -1,3 +1,5 @@
+"use client"
+
 import { supabase } from "@/utils/supabase"
 import Countdown from "@/components/counters/Countdown";
 import { ImageOff, ShoppingCart, Share2 } from "lucide-react";
@@ -12,7 +14,17 @@ async function getWishlist(list_id) {
 
     if (error) throw new Error(error);
 
-    return wishlist;
+    const {data: userData, error: errorUserError} = await supabase
+        .from("profiles")
+        .select("username")
+        .eq("user_id", wishlist.user)
+        .single();
+
+    if (errorUserError) throw new Error(errorUserError);
+
+    const wishlistData = {...wishlist, ...userData};
+
+    return wishlistData;
 }
 
 export default async function Wishlist({ params: { listid } }) {
@@ -23,6 +35,7 @@ export default async function Wishlist({ params: { listid } }) {
             <div className="flex justify-between items-end flex-wrap w-full gap-4 bg-base-100 p-4 rounded-lg">
                 <div className="w-3/4">
                     <h1 className="text-3xl sm:text-4xl w-fit text-left font-bold">{wishlist.title ? wishlist.title : "[No Title]"}</h1>
+                    <h2>Created by <span className="text-primary">{wishlist.username}</span></h2>
                     <p className="ml-1 mt-2 text-base sm:text-lg w-full lg:w-1/2">{wishlist.description}</p>
                 </div>
                 <div className="flex flex-col items-end">
@@ -67,3 +80,5 @@ export default async function Wishlist({ params: { listid } }) {
         </>
     )
 }
+
+export const revalidate = 0
