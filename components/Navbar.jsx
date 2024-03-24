@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { ScrollText, SquarePlus, User, LogIn, LogOut, CircleCheckBig } from "lucide-react";
+import { ScrollText, SquarePlus, User, LogIn, LogOut, Settings } from "lucide-react";
 import { supabase } from "@/utils/supabase";
 import { useEffect, useState } from "react";
 import SignOut from "./SignOut";
@@ -37,6 +37,7 @@ export default function Navbar() {
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                                     <li><Link href="/my/lists"><ScrollText height={20} />My Wishlists</Link></li>
+                                    <li><Link href="/my/settings"><Settings height={20} />Settings</Link></li>
                                     <li><SignOut><LogOut height={20} />Sign out</SignOut></li>
                                 </ul>
                             </div>
