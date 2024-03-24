@@ -1,7 +1,12 @@
 "use client"
-import { RotateCcw } from "lucide-react"
+import { RotateCcw } from "lucide-react";
+import { useEffect } from "react";
 
 export default function Error({ error, reset }) {
+    useEffect(() => {
+        console.error(error);
+    }, [error]);
+
     return (
         <div className="py-24 lg:px-24 w-full flex flex-col items-center">
             <h1 className="text-3xl sm:text-4xl text-center font-bold ml-2">An Error Occured!</h1>
