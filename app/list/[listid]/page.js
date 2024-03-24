@@ -1,6 +1,7 @@
 import { supabase } from "@/utils/supabase"
 import Countdown from "@/components/counters/Countdown";
-import { ImageOff, ShoppingCart } from "lucide-react";
+import { ImageOff, ShoppingCart, Share2 } from "lucide-react";
+import ShareModal, {ShowShareModalButton} from "@/components/modals/ShareModal";
 
 async function getWishlist(list_id) {
     const { data: wishlist, error } = await supabase
@@ -27,9 +28,12 @@ export default async function Wishlist({ params: { listid } }) {
                     <h1 className="text-3xl sm:text-4xl w-fit text-left font-bold">{wishlist.title ? wishlist.title : "[No Title]"}</h1>
                     <p className="ml-1 mt-2 text-base sm:text-lg w-full lg:w-1/2">{wishlist.description}</p>
                 </div>
-                {wishlist.has_deadline && (
-                    <Countdown date={wishlist.deadline} />
-                )}
+                <div className="flex flex-col items-end">
+                    <ShowShareModalButton className="btn btn-ghost btn-circle"><Share2 className="w-6 h-6"/></ShowShareModalButton>
+                    {wishlist.has_deadline && (
+                        <Countdown date={wishlist.deadline} />
+                    )}
+                </div>
             </div>
             <h2 className="w-full text-center mt-12 text-2xl sm:text-3xl font-bold">Products</h2>
             <div className="flex flex-wrap justify-center w-full gap-2 mt-8">
@@ -60,6 +64,7 @@ export default async function Wishlist({ params: { listid } }) {
                         </div>
                     ) : <></>}
             </div>
+            <ShareModal list_id={listid} title={wishlist.title} text={wishlist.description} />
         </>
     )
 }
