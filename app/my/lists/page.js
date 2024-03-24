@@ -33,7 +33,7 @@ export default async function MyLists() {
                                 </div>
                                 <div className="card-actions mt-1">
                                     <div className="tooltip tooltip-bottom" data-tip="Open Wishlist">
-                                        <Link href={"https://mywishlists.fabian-kleine.dev/list/" + wishlist.list_id} className="btn btn-sm btn-square"><LinkIcon className="h-4 w-4" /></Link>
+                                        <Link prefetch={false} href={"/list/" + wishlist.list_id} className="btn btn-sm btn-square"><LinkIcon className="h-4 w-4" /></Link>
                                     </div>
                                     <div className="tooltip tooltip-bottom" data-tip="Share Wishlist">
                                         <ShowShareModalButton modalId={wishlist.list_id} className="btn btn-sm btn-square"><Share2 className="h-4 w-4" /></ShowShareModalButton>
