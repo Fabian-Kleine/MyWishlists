@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 export default function Countdown({ date }) {
     const calculateTimeLeft = () => {
         const difference = +new Date(date) - +new Date();
-        console.log(difference)
         let timeLeft = {};
 
         if (difference > 0) {
