@@ -1,5 +1,3 @@
-"use client"
-
 import { supabase } from "@/utils/supabase"
 import Countdown from "@/components/counters/Countdown";
 import { ImageOff, ShoppingCart, Share2 } from "lucide-react";
