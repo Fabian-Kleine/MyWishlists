@@ -62,7 +62,9 @@ export default async function Wishlist({ params: { listid } }) {
                                 </div>
                             </div>
                         </div>
-                    ) : <></>}
+                    ) : <>
+                    No Products added
+                    </>}
             </div>
             <ShareModal list_id={listid} title={wishlist.title} text={wishlist.description} />
         </>
