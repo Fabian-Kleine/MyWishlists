@@ -25,7 +25,7 @@ export default async function MyLists() {
                         <ShareModal key={index} list_id={wishlist.list_id} title={wishlist.title} text={wishlist.description} modalId={wishlist.list_id} />
                         <div key={index} className="card w-96 bg-base-100 shadow-xl h-fit">
                             <div className="card-body py-5">
-                                <h2 className="card-title">{wishlist.title}</h2>
+                                <h2 className="card-title">{wishlist.title ? wishlist.title : "[No Title]"}</h2>
                                 <p className="line-clamp-3">{wishlist.description}</p>
                                 <div className="card-actions justify-center">
                                     <Link href={`/list/create?list_id=${wishlist.list_id}`} className="btn btn-sm btn-primary flex-grow"><Pencil className="h-4 w-4" />Edit</Link>
