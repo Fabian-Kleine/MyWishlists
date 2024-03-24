@@ -1,7 +1,6 @@
 "use client"
 import { supabase } from "@/utils/supabase";
 import ErrorModal, {ShowErrorModal} from "@/components/modals/ErrorModal";
-import { useState } from "react";
 
 async function getUserProfile() {
     const { data: { session } } = await supabase.auth.getSession();
