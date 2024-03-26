@@ -21,7 +21,7 @@ export default function Loading() {
                             <div className="skeleton h-6 w-full mb-2"></div>
                             <div className="skeleton h-6 w-1/3 mb-2"></div>
                             <div className="card-action">
-                                <button className="btn btn-primary w-full h-8"><span className="loading loading-spinner"></span>Loading</button>
+                                <button className="btn btn-primary w-full h-8 animate-pulse"></button>
                             </div>
                         </div>
                     </div>

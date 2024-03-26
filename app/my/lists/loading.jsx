@@ -9,8 +9,8 @@ export default function Loading() {
                         <div className="skeleton h-4 w-full"></div>
                         <div className="skeleton h-4 w-36"></div>
                         <div className="card-actions justify-center">
-                            <button className="btn btn-sm btn-primary flex-grow"><span className="loading loading-spinner"></span>Loading</button>
-                            <button className="btn btn-sm btn-neutral flex-grow"><span className="loading loading-spinner"></span>Loading</button>
+                            <button className="btn btn-sm btn-primary flex-grow animate-pulse"></button>
+                            <button className="btn btn-sm btn-neutral flex-grow animate-pulse"></button>
                         </div>
                         <div className="card-actions mt-1">
                             <div className="tooltip tooltip-bottom" data-tip="Open Wishlist">
