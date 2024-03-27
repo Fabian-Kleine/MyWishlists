@@ -6,6 +6,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
 import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
 import Link from "next/link";
+import Image from "next/image";
 import { generateUID } from "@/utils/generatID";
 
 export default function AddWish() {
@@ -207,7 +208,7 @@ export default function AddWish() {
                     <div className="flex justify-evenly flex-wrap gap-3">
                         <a href="https://amazon.com" target="_blank" className="card bg-base-100 shadow-xl image-full">
                             <figure className="h-32 w-56 flex justify-center items-center">
-                                <img className="object-contain w-full h-full" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" />
+                                <Image className="object-contain w-full h-full" width={400} height={400} src="/shop-logos/amazon.png" alt="Amazon" />
                             </figure>
                             <div className="card-body p-0 px-12 flex justify-start items-center">
                                 <h2 className="card-title">Amazon</h2>
@@ -215,7 +216,7 @@ export default function AddWish() {
                         </a>
                         <a href="https://ebay.com" target="_blank" className="card bg-base-100 shadow-xl image-full">
                             <figure className="h-32 w-56 flex justify-center items-center">
-                                <img className="object-contain w-full h-full" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2560px-EBay_logo.svg.png" alt="eBay" />
+                                <Image className="object-contain w-full h-full" width={400} height={400} src="/shop-logos/ebay.png" alt="eBay" />
                             </figure>
                             <div className="card-body p-0 px-12 flex justify-start items-center">
                                 <h2 className="card-title">eBay</h2>
@@ -223,7 +224,7 @@ export default function AddWish() {
                         </a>
                         <a href="https://kleinanzeigen.de" target="_blank" className="card bg-base-100 shadow-xl image-full">
                             <figure className="h-32 w-56 flex justify-center items-center">
-                                <img className="object-contain w-full h-full" src="https://themen.kleinanzeigen.de/thumbnails/75262aff9fb768361164bfe90d87fceaed5f60d7/sharing.9dd29df345d7.png" alt="Kleinanzeigen" />
+                                <Image className="object-contain w-full h-full" width={400} height={400} src="/shop-logos/kleinanzeigen.png" alt="Kleinanzeigen" />
                             </figure>
                             <div className="card-body p-0 px-12 flex justify-start items-center">
                                 <h2 className="card-title">Kleinanzeigen</h2>
@@ -231,7 +232,7 @@ export default function AddWish() {
                         </a>
                         <a href="https://lego.com" target="_blank" className="card bg-base-100 shadow-xl image-full">
                             <figure className="h-32 w-56 flex justify-center items-center">
-                                <img className="object-contain w-full h-full" src="https://assets.lego.com/logos/v4.5.0/brand-lego.svg" alt="LEGO" />
+                                <Image className="object-contain w-full h-full" width={400} height={400} src="/shop-logos/lego.svg" alt="LEGO" />
                             </figure>
                             <div className="card-body p-0 px-12 flex justify-start items-center">
                                 <h2 className="card-title">LEGO</h2>
@@ -239,16 +240,14 @@ export default function AddWish() {
                         </a>
                         <a href="https://zalando.com" target="_blank" className="card bg-base-100 shadow-xl image-full">
                             <figure className="h-32 w-56 flex justify-center items-center">
-                                <img className="object-contain w-full h-full" src="https://corporate.zalando.com/sites/default/files/styles/teaser_hero_extra_small/public/media/zalando-logo.jpg?h=4b68583a&itok=Ni_XeYjZ" alt="Zalando" />
-                            </figure>
+                                <Image className="object-contain w-full h-full" width={400} height={400} src="/shop-logos/zalando.jpg" alt="Zalando" />                            </figure>
                             <div className="card-body p-0 px-12 flex justify-start items-center">
                                 <h2 className="card-title">Zalando</h2>
                             </div>
                         </a>
                         <a href="https://aboutyou.com" target="_blank" className="card bg-base-100 shadow-xl image-full">
                             <figure className="h-32 w-56 flex justify-center items-center">
-                                <img className="object-contain w-full h-full" src="https://corporate.aboutyou.de/app/uploads/2016/09/AY_Logo.png" alt="About You" />
-                            </figure>
+                                <Image className="object-contain w-full h-full" width={400} height={400} src="/shop-logos/aboutyou.png" alt="About You" />                            </figure>
                             <div className="card-body p-0 px-12 flex justify-start items-center">
                                 <h2 className="card-title">About You</h2>
                             </div>
