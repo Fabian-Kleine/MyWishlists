@@ -4,7 +4,7 @@ import { supabase } from "@/utils/supabase";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function SignInForm() {
+export default function SignInForm({ redirectURL }) {
     const router = useRouter();
 
     const [errorMsg, setErrorMsg] = useState("");
@@ -26,10 +26,9 @@ export default function SignInForm() {
             return;
         }
 
-        const { data: { session } } = await supabase.auth.getSession();
-
         setIsLoading(false);
-        router.replace('/?signin=1');
+        redirectURL = redirectURL ? redirectURL : "/?signin=1";
+        router.replace(redirectURL);
     }
 
     return (

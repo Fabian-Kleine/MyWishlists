@@ -12,7 +12,7 @@ export default function Layout({ children }) {
                     {children}
                 </Suspense>
             </div>
-            <CheckLoggedIn redirectUrl={'/my/signin?unauthorized=1'} redirectOnValid={false} />
+            <CheckLoggedIn redirectUrl={'/my/signin?unauthorized=1&redirectURL=%2Fmy%2Fsettings'} redirectOnValid={false} />
         </main>
     )
 }

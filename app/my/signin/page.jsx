@@ -6,6 +6,7 @@ import { CircleCheckBig, CircleAlert } from "lucide-react";
 export default async function Signin({ searchParams }) {
     const signoutMsg = searchParams.signout == 1;
     const unauthorizedMsg = searchParams.unauthorized == 1;
+    const redirectURL = searchParams.redirectURL;
 
     return (
         <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-center mobile:px-24">
@@ -16,7 +17,7 @@ export default async function Signin({ searchParams }) {
                         <p className="py-6">Sign in to create and manage your wishlists</p>
                     </div>
                     <div className="card shrink-0 w-full max-w-xs shadow-2xl bg-base-100">
-                        <SignInForm />
+                        <SignInForm redirectURL={redirectURL} />
                     </div>
                 </div>
                 <div className="hero-content flex-col">
@@ -25,7 +26,7 @@ export default async function Signin({ searchParams }) {
                         <p className="py-6">Sign up if you don't have an account already</p>
                     </div>
                     <div className="card shrink-0 w-full max-w-xs shadow-2xl bg-base-100">
-                        <SignUpForm />
+                        <SignUpForm redirectURL={redirectURL} />
                     </div>
                 </div>
             </div>

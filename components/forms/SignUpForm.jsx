@@ -4,7 +4,7 @@ import { supabase } from "@/utils/supabase";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function SignUpForm() {
+export default function SignUpForm({ redirectURL }) {
     const router = useRouter();
 
     const [errorMsg, setErrorMsg] = useState("");
@@ -31,7 +31,8 @@ export default function SignUpForm() {
             .insert({ username: event.target[0].value });
 
         setIsLoading(false);
-        router.replace('/?signup=1');
+        redirectURL = redirectURL ? redirectURL : "/?signup=1";
+        router.replace(redirectURL);
     }
 
     return (
