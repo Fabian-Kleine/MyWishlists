@@ -8,7 +8,7 @@ export default function Footer() {
             </aside>
             <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
             <a href="https://fabian-kleine.dev/" target="_blank"><Globe /></a>
-                <a href="https://github.com/Fabian-Kleine/wishlist" target="_blank"><Github /></a>
+                <a href="https://github.com/Fabian-Kleine/MyWishlists" target="_blank"><Github /></a>
             </nav>
         </footer>
     )
