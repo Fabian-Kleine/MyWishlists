@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link";
-import CheckLoggedIn from "@/utils/checkLoggedIn";
 import { useSearchParams, useRouter } from "next/navigation";
 import { generateUID } from "@/utils/generatID";
 import { useState, useEffect } from "react";
@@ -66,7 +65,7 @@ export default function CreateList() {
             getWishlist();
         }
 
-    }, [searchParams]);
+    }, [list_id]);
 
     useEffect(() => {
         async function saveWish() {
@@ -131,7 +130,7 @@ export default function CreateList() {
     }
 
     return (
-        <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-between mobile:px-24">
+        <>
             <div className="py-24 lg:px-24 w-full flex flex-col items-center">
                 <h1 className="text-3xl sm:text-4xl text-center font-bold">Create Wishlist</h1>
                 <div className="w-full lg:w-1/2">
@@ -198,9 +197,8 @@ export default function CreateList() {
                         ) : <></>}
                 </div>
             </div>
-            <CheckLoggedIn redirectUrl={'/my/signin?unauthorized=1'} redirectOnValid={false} />
             <ErrorModal errorText={errorMsg} />
             <ShareModal list_id={list_id} title={title} text={description} />
-        </main>
+        </>
     )
 }

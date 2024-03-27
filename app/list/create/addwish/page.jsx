@@ -4,7 +4,6 @@ import { Save, CircleHelp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
-import CheckLoggedIn from "@/utils/checkLoggedIn";
 import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
 import Link from "next/link";
 import { generateUID } from "@/utils/generatID";
@@ -52,10 +51,10 @@ export default function AddWish() {
         async function getProducts() {
             setIsLoading(true);
             const { data: { products }, error } = await supabase
-            .from("wishlists")
-            .select("products")
-            .eq("list_id", list_id)
-            .single();
+                .from("wishlists")
+                .select("products")
+                .eq("list_id", list_id)
+                .single();
 
             if (error) {
                 console.error(error);
@@ -144,7 +143,7 @@ export default function AddWish() {
     }
 
     return (
-        <main className="flex min-h-screen bg-hero-img bg-hero flex-col items-center justify-between mobile:px-24">
+        <>
             <div className="py-24 lg:px-24 w-full flex flex-col items-center">
                 <h1 className="text-3xl sm:text-4xl text-center font-bold">Add Wish</h1>
                 <div className="w-full lg:w-1/2">
@@ -190,7 +189,7 @@ export default function AddWish() {
                                 <span>Product Image</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <Link href={'/list/create?list_id='+list_id} className="btn btn-error">Cancel</Link>
+                                <Link href={'/list/create?list_id=' + list_id} className="btn btn-error">Cancel</Link>
                                 <button onClick={handleWishSave} disabled={isLoading} className="btn btn-primary px-12">{isLoading ? <><span className="loading loading-spinner"></span>Loading</> : <><Save className="mr-1" />Save</>}</button>
                             </div>
                         </div>
@@ -198,7 +197,6 @@ export default function AddWish() {
                 </div>
             </div>
             <ErrorModal errorText={errorMsg} />
-            <CheckLoggedIn redirectUrl={'/my/signin?unauthorized=1'} redirectOnValid={false} />
             <dialog id="supportedWebsitesModal" className="modal">
                 <div className="modal-box">
                     <form method="dialog">
@@ -258,6 +256,6 @@ export default function AddWish() {
                     </div>
                 </div>
             </dialog>
-        </main>
+        </>
     )
 }

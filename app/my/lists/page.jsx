@@ -6,12 +6,29 @@ import Link from "next/link";
 import DeleteWishlistButton from "@/components/db/deleteWishlistButton";
 
 async function getWishlists() {
-    const { data: { session: { user: { id: userId } } } } = await supabase.auth.getSession();
-    const wishlists = await supabase
-        .from("wishlists")
-        .select("*")
-        .eq("user", userId);
-    return wishlists.data;
+    try {
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+        if (sessionError) {
+            throw new Error(sessionError.message);
+        }
+
+        if (!session || !session.user) {
+            throw new Error("User session not found");
+        }
+
+        const userId = session.user.id;
+
+        const wishlists = await supabase
+            .from("wishlists")
+            .select("*")
+            .eq("user", userId);
+        
+        return wishlists.data;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
 }
 
 export default async function MyLists() {
