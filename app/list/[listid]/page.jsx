@@ -43,7 +43,7 @@ export default async function Wishlist({ params: { listid } }) {
                     )}
                 </div>
             </div>
-            <h2 className="w-full text-center mt-12 text-2xl sm:text-3xl font-bold">Products</h2>
+            <h2 className="w-full text-center mt-12 text-2xl sm:text-3xl font-bold">Wishes</h2>
             <div className="flex flex-wrap justify-center w-full gap-2 mt-8">
                 {wishlist?.products?.length ?
                     wishlist.products.map((product, index) =>
