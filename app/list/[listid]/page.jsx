@@ -2,6 +2,7 @@ import { supabase } from "@/utils/supabase"
 import Countdown from "@/components/counters/Countdown";
 import { ImageOff, ShoppingCart, Share2 } from "lucide-react";
 import ShareModal, {ShowShareModalButton} from "@/components/modals/ShareModal";
+import { redirect } from "next/navigation";
 
 async function getWishlist(list_id) {
     const { data: wishlist, error } = await supabase
@@ -10,6 +11,8 @@ async function getWishlist(list_id) {
         .eq("list_id", list_id)
         .single();
 
+    if (error?.code == "PGRST116") redirect('/not-found');
+    
     if (error) throw new Error(error);
 
     const {data: userData, error: errorUserError} = await supabase
