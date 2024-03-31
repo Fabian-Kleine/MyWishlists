@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { ScrollText, SquarePlus, User, LogIn, LogOut, Settings } from "lucide-react";
+import { ScrollText, User, LogIn, LogOut, Settings, Gift } from "lucide-react";
 import { supabase } from "@/utils/supabase";
 import { useEffect, useState } from "react";
 import SignOut from "./SignOut";
@@ -29,7 +29,7 @@ export default function Navbar() {
                 </div>
                 <div className="flex-none">
                     <ul className="menu menu-horizontal justify-center xs:justify-start px-1">
-                        <li className="justify-center"><Link className="gap-1" href="/list/create"><SquarePlus height={20} />Create Wishlist</Link></li>
+                        <li className="justify-center"><Link className="gap-1" href="/list/create"><Gift height={20} />Create Wishlist</Link></li>
                         {sessionState != null ? (
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
