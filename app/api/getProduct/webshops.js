@@ -5,7 +5,8 @@ const webshops = [
         titleQuery: "#productTitle",
         composedPrice: true,
         priceQuery: ".a-price-whole",
-        priceQuery2: ".a-price-fraction"
+        priceQuery2: ".a-price-fraction",
+        affiliateID: "mywishlists00-21"
     },
     {
         hostname: "ebay",

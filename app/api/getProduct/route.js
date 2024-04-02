@@ -9,7 +9,8 @@ export async function POST(req) {
         return NextResponse.json({
             title: body.title,
             price: body.price,
-            image: null
+            image: null,
+            link: body.link
         });
     }
     const url = new URL(body.link);
@@ -31,16 +32,22 @@ export async function POST(req) {
         if (webshopdata.replacePriceText && price != body.price) {
             price = price.replace(/[^0-9,]/g, '').trim();
         }
+        if(webshopdata.affiliateID) {
+            url.hash = "";
+            url.search = `?tag=${webshopdata.affiliateID}`;
+        }
         return NextResponse.json({
             title,
             image,
             price,
+            link: url.href
         });
     }
 
     return NextResponse.json({
         title: body.title,
         price: body.price,
-        image: null
+        image: null,
+        link: body.link
     });
 }

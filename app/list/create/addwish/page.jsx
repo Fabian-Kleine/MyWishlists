@@ -45,6 +45,7 @@ export default function AddWish() {
             setProductImage(data.image);
             setTitle(data.title);
             setPrice(data.price);
+            setLink(data.link);
             setIsLoading(false);
         }
         fetchProduct();
