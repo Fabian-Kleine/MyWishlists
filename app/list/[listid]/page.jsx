@@ -34,12 +34,12 @@ export default async function Wishlist({ params: { listid } }) {
     return (
         <>
             <div className="flex justify-between items-end flex-wrap w-full gap-4 bg-base-100 p-4 rounded-lg">
-                <div className="w-3/4">
+                <div className="w-2/3">
                     <h1 className="text-3xl sm:text-4xl w-fit text-left font-bold">{wishlist.title ? wishlist.title : "[No Title]"}</h1>
                     <h2>Created by <span className="text-primary">{wishlist.username}</span></h2>
                     <p className="ml-1 mt-2 text-base sm:text-lg w-full lg:w-1/2">{wishlist.description}</p>
                 </div>
-                <div className="flex flex-col items-end">
+                <div className="flex flex-col items-start 2xl:items-end">
                     <ShowShareModalButton className="btn btn-ghost btn-circle"><Share2 className="w-6 h-6"/></ShowShareModalButton>
                     {wishlist.has_deadline && (
                         <Countdown date={wishlist.deadline} />
