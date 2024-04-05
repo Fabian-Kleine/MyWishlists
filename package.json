@@ -1,7 +1,8 @@
 {
-  "name": "wishlist",
+  "name": "mywishlists",
   "version": "0.1.0",
   "private": true,
+  "author": "Fabian Kleine",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
