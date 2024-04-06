@@ -40,7 +40,7 @@ export default async function MyLists() {
                 wishlists.map((wishlist, index) => (
                     <>
                         <ShareModal key={index} list_id={wishlist.list_id} title={wishlist.title} text={wishlist.description} modalId={wishlist.list_id} />
-                        <div key={index} className="card w-96 bg-base-100 shadow-xl h-fit">
+                        <div key={index} className="card w-96 bg-base-100 shadow-xl h-fit mx-4">
                             <div className="card-body py-5">
                                 <h2 className="card-title">{wishlist.title ? wishlist.title : "[No Title]"}</h2>
                                 <p className="line-clamp-3">{wishlist.description}</p>

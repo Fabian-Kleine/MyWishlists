@@ -47,7 +47,7 @@ export default function Navbar() {
                                     <summary className="px-7">
                                         <User height={20} />Profile
                                     </summary>
-                                    <ul className="p-2 bg-base-100 rounded-t-none">
+                                    <ul className="p-2 bg-base-100 rounded-t-none z-50">
                                         <li><Link className="p-2" href="/my/lists"><ScrollText height={20} />My Wishlists</Link></li>
                                         <li><Link className="p-2" href="/my/signin"><LogIn height={20} />Sign in</Link></li>
                                     </ul>

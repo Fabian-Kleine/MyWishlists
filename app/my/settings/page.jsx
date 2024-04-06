@@ -47,7 +47,7 @@ export default async function Settings() {
     }
 
     return (
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-1/2 px-4">
             <form onSubmit={handleSaveUser}>
                 <div className="flex flex-col gap-2">
                     <label className="form-control w-full">

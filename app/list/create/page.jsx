@@ -131,7 +131,7 @@ export default function CreateList() {
 
     return (
         <>
-            <div className="py-24 lg:px-24 w-full flex flex-col items-center">
+            <div className="py-24 lg:px-24 w-full flex flex-col items-center px-4">
                 <h1 className="text-3xl sm:text-4xl text-center font-bold">Create Wishlist</h1>
                 <div className="w-full lg:w-1/2">
                     <div className="flex flex-col gap-2">
@@ -153,10 +153,10 @@ export default function CreateList() {
                             </div>
                             <input defaultValue={wishlist?.deadline} onBlur={(e) => setDate(e.target.value)} disabled={!deadlineActive} id="date" name="date" type="date" className="input input-bordered w-full" />
                         </label>
-                        <div className="flex justify-between flex-wrap items-center gap-5 mt-3">
+                        <div className="flex justify-center mobile:justify-between flex-col mobile:flex-row flex-wrap items-center gap-5 mt-3">
                             <Link href={`/list/create/addwish?list_id=${list_id}`} className="btn btn-primary px-24" type="button"><PackagePlus />Add Wish</Link>
-                            <div className="tooltip" data-tip="Share Wishlist">
-                                <button type="button" onClick={() => ShowShareModal()} className="btn btn-ghost btn-circle"><Share2 /></button>
+                            <div className="tooltip w-full mobile:w-min" data-tip="Share Wishlist">
+                                <button type="button" onClick={() => ShowShareModal()} className="btn btn-neutral mobile:btn-ghost mobile:btn-circle mobile:indent-[-9999px] w-full"><Share2 />Share</button>
                             </div>
                         </div>
                     </div>

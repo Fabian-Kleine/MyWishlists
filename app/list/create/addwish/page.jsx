@@ -146,7 +146,7 @@ export default function AddWish() {
 
     return (
         <>
-            <div className="py-24 lg:px-24 w-full flex flex-col items-center">
+            <div className="py-24 lg:px-24 w-full flex flex-col items-center px-4">
                 <h1 className="text-3xl sm:text-4xl text-center font-bold">Add Wish</h1>
                 <div className="w-full lg:w-1/2">
                     <div className="flex flex-col gap-2">
@@ -185,8 +185,8 @@ export default function AddWish() {
                                 </select>
                             </div>
                         </label>
-                        <div className="flex justify-between mt-5">
-                            <div className={productImage?.length ? "visible" : "invisible"}>
+                        <div className="flex justify-center items-center mobile:justify-between flex-col mobile:flex-row mt-5">
+                            <div className={`flex flex-col items-center mobile:items-start ${productImage?.length ? "visible" : "invisible"}`}>
                                 <img className="w-1/2" src={productImage} alt="Product Image" />
                                 <span>Product Image</span>
                             </div>
