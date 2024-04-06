@@ -33,9 +33,9 @@ export default async function Wishlist({ params: { listid } }) {
 
     return (
         <>
-            <div className="flex justify-between items-end flex-wrap w-full gap-4 bg-base-100 p-4 rounded-lg">
-                <div className="w-2/3">
-                    <h1 className="text-3xl sm:text-4xl w-fit text-left font-bold">{wishlist.title ? wishlist.title : "[No Title]"}</h1>
+            <div className="flex flex-col mobile:flex-row justify-start mobile:justify-between items-start mobile:items-end flex-wrap w-full gap-4 bg-base-100 p-4 rounded-lg">
+                <div className="w-full mobile:w-2/3">
+                    <h1 className="text-3xl sm:text-4xl w-full mobile:w-fit text-left font-bold">{wishlist.title ? wishlist.title : "[No Title]"}</h1>
                     <h2>Created by <span className="text-primary">{wishlist.username}</span></h2>
                     <p className="ml-1 mt-2 text-base sm:text-lg w-full lg:w-1/2">{wishlist.description}</p>
                 </div>
@@ -68,7 +68,7 @@ export default async function Wishlist({ params: { listid } }) {
                                         <span className="text-xl font-bold text-accent">Price: {product.price} {product.currency}</span>
                                     ) : <></>}
                                 </div>
-                                <div className="card-action">
+                                <div className="card-actions">
                                     <a className="btn btn-primary w-full font-bold" href={product.link} target="_blank"><ShoppingCart />Visit Shop</a>
                                 </div>
                             </div>
