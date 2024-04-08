@@ -28,7 +28,7 @@ export default function ShareModal({ list_id, title, text, modalId }) {
                         <span className="label-text">Wishlist Link</span>
                     </div>
                     <div className="join">
-                        <input disabled id="title" name="title" type="text" value={wishlist_url} className="input input-bordered w-full join-item disabled:cursor-text" />
+                        <input disabled type="text" value={wishlist_url} className="input input-bordered w-full join-item disabled:cursor-text" />
                         <div className="tooltip" data-tip="Copy Link to Clipboard">
                             <button onClick={() => navigator.clipboard.writeText(wishlist_url)} className="btn join-item"><LinkIcon /></button>
                         </div>
