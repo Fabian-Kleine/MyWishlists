@@ -31,32 +31,32 @@ export default function Countdown({ date }) {
 
     return (
         <div className="grid grid-flow-col gap-5 text-center auto-cols-max w-fit">
-            <div className="flex flex-col">
-                <span className="countdown font-mono text-5xl">
+            <div className="flex flex-col items-center">
+                <span className="countdown font-mono text-2xl mobile:text-5xl">
                     <span style={{ "--value": timeLeft.months }}></span>
                 </span>
                 months
             </div>
-            <div className="flex flex-col">
-                <span className="countdown font-mono text-5xl">
+            <div className="flex flex-col items-center">
+                <span className="countdown font-mono text-2xl mobile:text-5xl">
                     <span style={{ "--value": timeLeft.days }}></span>
                 </span>
                 days
             </div>
-            <div className="flex flex-col">
-                <span className="countdown font-mono text-5xl">
+            <div className="flex flex-col items-center">
+                <span className="countdown font-mono text-2xl mobile:text-5xl">
                     <span style={{ "--value": timeLeft.hours }}></span>
                 </span>
                 hours
             </div>
-            <div className="flex flex-col">
-                <span className="countdown font-mono text-5xl">
+            <div className="flex flex-col items-center">
+                <span className="countdown font-mono text-2xl mobile:text-5xl">
                     <span style={{ "--value": timeLeft.minutes }}></span>
                 </span>
                 min
             </div>
-            <div className="flex flex-col">
-                <span className="countdown font-mono text-5xl">
+            <div className="flex flex-col items-center">
+                <span className="countdown font-mono text-2xl mobile:text-5xl">
                     <span style={{ "--value": timeLeft.seconds }}></span>
                 </span>
                 sec
