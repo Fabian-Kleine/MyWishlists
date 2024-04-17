@@ -10,7 +10,7 @@ const webshops = [
     },
     {
         hostname: "ebay",
-        imageQuery: ".ux-image-magnify__image--original",
+        imageQuery: ".image img",
         titleQuery: ".x-item-title__mainTitle",
         replacePriceText: true,
         priceQuery: ".x-price-primary",
