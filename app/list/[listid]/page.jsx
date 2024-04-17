@@ -1,7 +1,7 @@
 import { supabase } from "@/utils/supabase"
 import Countdown from "@/components/counters/Countdown";
 import { ImageOff, ShoppingCart, Share2 } from "lucide-react";
-import ShareModal, {ShowShareModalButton} from "@/components/modals/ShareModal";
+import ShareModal, { ShowShareModalButton } from "@/components/modals/ShareModal";
 import { redirect } from "next/navigation";
 
 async function getWishlist(list_id) {
@@ -12,10 +12,10 @@ async function getWishlist(list_id) {
         .single();
 
     if (error?.code == "PGRST116") redirect('/not-found');
-    
+
     if (error) throw new Error(error);
 
-    const {data: userData, error: errorUserError} = await supabase
+    const { data: userData, error: errorUserError } = await supabase
         .from("profiles")
         .select("username")
         .eq("user_id", wishlist.user)
@@ -23,7 +23,7 @@ async function getWishlist(list_id) {
 
     if (errorUserError) throw new Error(errorUserError);
 
-    const wishlistData = {...wishlist, ...userData};
+    const wishlistData = { ...wishlist, ...userData };
 
     return wishlistData;
 }
@@ -40,7 +40,7 @@ export default async function Wishlist({ params: { listid } }) {
                     <p className="ml-1 mt-2 text-base sm:text-lg w-full lg:w-1/2">{wishlist.description}</p>
                 </div>
                 <div className="flex flex-col items-start 2xl:items-end">
-                    <ShowShareModalButton className="btn btn-ghost btn-circle"><Share2 className="w-6 h-6"/></ShowShareModalButton>
+                    <ShowShareModalButton className="btn btn-ghost btn-circle"><Share2 className="w-6 h-6" /></ShowShareModalButton>
                     {wishlist.has_deadline && (
                         <Countdown date={wishlist.deadline} />
                     )}
@@ -68,13 +68,15 @@ export default async function Wishlist({ params: { listid } }) {
                                         <span className="text-xl font-bold text-accent">Price: {product.price} {product.currency}</span>
                                     ) : <></>}
                                 </div>
-                                <div className="card-actions">
-                                    <a className="btn btn-primary w-full font-bold" href={product.link} target="_blank"><ShoppingCart />Visit Shop</a>
-                                </div>
+                                {product.link ? (
+                                    <div className="card-actions">
+                                        <a className="btn btn-primary w-full font-bold" href={product.link} target="_blank"><ShoppingCart />Visit Shop</a>
+                                    </div>
+                                ) : <></>}
                             </div>
                         </div>
                     ) : <>
-                    No Products added
+                        No Wishes added
                     </>}
             </div>
             <ShareModal list_id={listid} title={wishlist.title} text={wishlist.description} />
