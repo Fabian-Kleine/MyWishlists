@@ -80,7 +80,7 @@ export default function MarkAsPurchasedButton({ productPurchased, productId, lis
     }, [])
 
     return (
-        <button onClick={handleButtonClick} className="btn btn-primary w-full font-bold capitalize">
+        <button onClick={handleButtonClick} className={`btn btn-primary w-full font-bold capitalize ${purchased && "btn-active"}`}>
             {purchased ? (
                 <><PinOff />Unmark</>
             ) : (
