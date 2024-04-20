@@ -2,6 +2,7 @@ import { supabase } from "@/utils/supabase"
 import Countdown from "@/components/counters/Countdown";
 import { ImageOff, ShoppingCart, Share2 } from "lucide-react";
 import ShareModal, { ShowShareModalButton } from "@/components/modals/ShareModal";
+import MarkAsPurchasedButton from "@/components/db/MarkAsPurchasedButton";
 import { redirect } from "next/navigation";
 
 async function getWishlist(list_id) {
@@ -68,11 +69,12 @@ export default async function Wishlist({ params: { listid } }) {
                                         <span className="text-xl font-bold text-accent">Price: {product.price} {product.currency}</span>
                                     ) : <></>}
                                 </div>
-                                {product.link ? (
-                                    <div className="card-actions">
-                                        <a className="btn btn-primary w-full font-bold" href={product.link} target="_blank"><ShoppingCart />Visit Shop</a>
-                                    </div>
-                                ) : <></>}
+                                <div className="card-actions">
+                                    <MarkAsPurchasedButton productPurchased={product.purchased} productId={product.id} listId={listid} />
+                                    {product.link ? (
+                                        <a className="btn btn-neutral w-full font-bold" href={product.link} target="_blank"><ShoppingCart />Visit Shop</a>
+                                    ) : <></>}
+                                </div>
                             </div>
                         </div>
                     ) : <>
