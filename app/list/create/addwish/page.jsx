@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
 import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 import Image from "next/image";
 import { generateUID } from "@/utils/generatID";
 

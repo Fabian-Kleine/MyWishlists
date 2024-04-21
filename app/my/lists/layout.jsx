@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Loading from "./loading";
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 import CheckLoggedIn from "@/utils/checkLoggedIn";
 import { Gift } from "lucide-react";
 

@@ -1,5 +1,6 @@
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import { ViewTransitions } from "next-view-transitions";
 
 //import components
 import Navbar from "@/components/Navbar";
@@ -21,14 +22,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={nunito_init.variable}>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-      <PageViews />
-      <UpdateUserCookie />
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body className={nunito_init.variable}>
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+        <PageViews />
+        <UpdateUserCookie />
+      </html>
+    </ViewTransitions>
   );
 }

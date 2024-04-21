@@ -2,7 +2,7 @@ import { ScrollText, Users, Zap, CircleCheckBig } from "lucide-react";
 import ViewCount from "@/components/counters/ViewCount";
 import WishlistCount from "@/components/counters/WishlistCount";
 import UserCount from "@/components/counters/UserCount";
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 
 export default function Home({ searchParams }) {
   const signinMsg = searchParams.signin == 1;

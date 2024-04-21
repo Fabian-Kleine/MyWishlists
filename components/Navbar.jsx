@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 import { ScrollText, User, LogIn, LogOut, Settings, Gift } from "lucide-react";
 import { supabase } from "@/utils/supabase";
 import { useEffect, useState } from "react";
