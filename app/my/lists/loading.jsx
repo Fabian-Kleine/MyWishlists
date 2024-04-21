@@ -13,12 +13,8 @@ export default function Loading() {
                             <button className="btn btn-sm btn-neutral flex-grow animate-pulse"></button>
                         </div>
                         <div className="card-actions mt-1">
-                            <div className="tooltip tooltip-bottom" data-tip="Open Wishlist">
-                                <button className="btn btn-sm btn-square"><span className="loading loading-spinner loading-sm"></span></button>
-                            </div>
-                            <div className="tooltip tooltip-bottom" data-tip="Share Wishlist">
-                                <button className="btn btn-sm btn-square"><span className="loading loading-spinner loading-sm"></span></button>
-                            </div>
+                            <button className="btn btn-sm btn-square"><span className="loading loading-spinner loading-sm"></span></button>
+                            <button className="btn btn-sm btn-square"><span className="loading loading-spinner loading-sm"></span></button>
                         </div>
                     </div>
                 </div>
