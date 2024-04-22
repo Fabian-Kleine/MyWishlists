@@ -41,19 +41,19 @@ export default function SignUpForm({ redirectURL }) {
                 <label className="label">
                     <span className="label-text">Username</span>
                 </label>
-                <input type="text" placeholder="username" className="input input-bordered" required />
+                <input type="text" placeholder="Username" className="input input-bordered" required />
             </div>
             <div className="form-control">
                 <label className="label">
                     <span className="label-text">Email</span>
                 </label>
-                <input type="email" placeholder="email" className="input input-bordered" required />
+                <input type="email" placeholder="example@example.com" className="input input-bordered" required />
             </div>
             <div className="form-control">
                 <label className="label">
                     <span className="label-text">Password</span>
                 </label>
-                <input type="password" placeholder="password" className="input input-bordered" required />
+                <input type="password" placeholder="*******" className="input input-bordered" required />
             </div>
             <div className="form-control">
                 <span className="text-red-600">{errorMsg}</span>
