@@ -55,6 +55,18 @@ export default function ForgotPasswordForm() {
         }
     }
 
+    function resetForm() {
+        setIsLoading(false);
+        setErrorMsg("");
+        setPassword("");
+        setNewPasswordFormActive(false);
+        setConfirmModalActive({
+            active: false,
+            title: "",
+            text: ""
+        });
+    }
+
     useEffect(() => {
         const channel = supabase.auth.onAuthStateChange(async (event, session) => {
             if (event == "PASSWORD_RECOVERY") {
@@ -108,8 +120,9 @@ export default function ForgotPasswordForm() {
                     <div className="form-control">
                         <span className="text-red-600">{errorMsg}</span>
                     </div>
-                    <div className="form-control mt-6">
+                    <div className="form-control mt-6 gap-2">
                         <button disabled={isLoading} type="submit" className="btn btn-primary">{isLoading ? <><span className="loading loading-spinner loading-sm"></span> Waiting...</> : "Recover Password"}</button>
+                        <button onClick={resetForm} className="btn btn-neutral" type="button">Reset Form</button>
                     </div>
                 </form>
             ) : (
@@ -118,7 +131,7 @@ export default function ForgotPasswordForm() {
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
-                        <input type="email" placeholder="example@example.com" className="input input-bordered" required />
+                        <input defaultValue={email} type="email" placeholder="example@example.com" className="input input-bordered" required />
                     </div>
                     <div className="form-control">
                         <span className="text-red-600">{errorMsg}</span>
