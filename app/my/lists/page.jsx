@@ -3,7 +3,7 @@ import { Pencil, Trash2, LinkIcon, Share2, SquarePlus } from "lucide-react";
 import ShareModal, { ShowShareModalButton } from "@/components/modals/ShareModal";
 import { supabase } from "@/utils/supabase";
 import { Link } from 'next-view-transitions';
-import DeleteWishlistButton from "@/components/db/deleteWishlistButton";
+import DeleteWishlistButton from "@/components/db/DeleteWishlistButton";
 
 async function getWishlists() {
     try {
