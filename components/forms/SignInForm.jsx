@@ -3,6 +3,7 @@
 import { supabase } from "@/utils/supabase";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Link } from "next-view-transitions";
 
 export default function SignInForm({ redirectURL }) {
     const router = useRouter();
@@ -45,7 +46,7 @@ export default function SignInForm({ redirectURL }) {
                 </label>
                 <input type="password" placeholder="*******" className="input input-bordered" required />
                 <label className="label">
-                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                    <Link href="/my/signin/forgot-password" className="label-text-alt link link-hover">Forgot password?</Link>
                 </label>
             </div>
             <div className="form-control">

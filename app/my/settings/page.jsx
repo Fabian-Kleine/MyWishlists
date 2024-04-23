@@ -1,6 +1,7 @@
 "use client"
 import { supabase } from "@/utils/supabase";
 import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
+import SuccessModal, { ShowSuccessModal } from "@/components/modals/SuccessModal";
 
 async function getUserProfile() {
     try {
@@ -42,8 +43,24 @@ export default async function Settings() {
             if (error) {
                 console.error(error);
                 ShowErrorModal();
+                return;
             }
         }
+        if(event.target[1].value) {
+            const { error } = await supabase.auth.updateUser({
+                password: event.target[1].value
+            });
+
+            if (error) {
+                console.error(error);
+                ShowErrorModal();
+                return;
+            }
+
+            event.target[1].value = "";
+        }
+
+        ShowSuccessModal();
     }
 
     return (
@@ -56,12 +73,19 @@ export default async function Settings() {
                         </div>
                         <input defaultValue={user?.username} id="username" name="username" type="text" placeholder="Username" className="input input-bordered input-lg w-full" />
                     </label>
+                    <label className="form-control w-full">
+                        <div className="label">
+                            <span className="label-text">New Password</span>
+                        </div>
+                        <input id="newpassword" name="newpassword" type="password" placeholder="******" className="input input-bordered w-full" />
+                    </label>
                     <div className="flex justify-end mt-5">
                         <button className="btn btn-primary" type="submit">Save</button>
                     </div>
                 </div>
             </form>
             <ErrorModal errorText={"An Error occured while saving your account data. Please try again later!"} />
+            <SuccessModal successText={"Successfully saved your account data!"} />
         </div>
     )
 }
