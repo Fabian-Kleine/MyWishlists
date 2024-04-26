@@ -48,7 +48,9 @@ export default function AddWish() {
                 body: JSON.stringify(productData)
             });
             const data = await res.json();
-            setProductImage(data.image);
+            if (data.image) {
+                setProductImage(data.image);
+            }
             setTitle(data.title);
             setPrice(data.price);
             // setLink(data.link);
