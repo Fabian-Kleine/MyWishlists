@@ -78,11 +78,14 @@ export default function AddWish() {
         }
         if (mode == "edit") {
             getProducts()
-            //fix infinite refreshing on mobile
-            document.getElementById('link').focus();
-            document.getElementById('link').blur();
         }
     }, [link, mode]);
+
+    useEffect(() => {
+        //fix infinite refreshing on mobile
+        document.getElementById('link').focus();
+        document.getElementById('link').blur();
+    }, []);
 
     async function handleWishSave() {
         setIsLoading(true);
