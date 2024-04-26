@@ -10,7 +10,7 @@ A Website where you can create custom wishlists and share them.
 - [x] live counter for wishlist deadline
 - [x] mark products as purchased in realtime
 - [x] credentials login
-- [ ] custom image upload for wishes/products
+- [x] custom image upload for wishes/products
 - [ ] multiple participants for one wish/product
 - [ ] (live chat)
 
