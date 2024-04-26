@@ -181,7 +181,7 @@ export default function CreateList() {
                                         {product.price ? (
                                             <span className="text-xl font-bold text-accent">Price: {product.price} {product.currency}</span>
                                         ) : <></>}
-                                        <div className="dropdown dropdown-top">
+                                        <div className="dropdown dropdown-top dropdown-end">
                                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle m-1"><EllipsisVertical /></div>
                                             <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                                 <li><Link href={`/list/create/addwish?list_id=${list_id}&mode=edit&product_id=${product.id}`}><Pencil height={15} />Edit</Link></li>
