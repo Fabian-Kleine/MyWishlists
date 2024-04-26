@@ -17,10 +17,10 @@ export async function POST(req) {
     const domainname = url.hostname.replace(/(www\.)?/, '').split('.')[0];
 
     if (webshops.some(shop => shop.hostname === domainname)) {
+        const webshopdata = webshops.find((webshop) => {
+            return webshop.hostname == domainname;
+        });
         try {
-            const webshopdata = webshops.find((webshop) => {
-                return webshop.hostname == domainname;
-            });
             const webpage = await axios.get(url);
             const $ = cheerio.load(webpage.data);
             let image = $(webshopdata.imageQuery).first().attr('src');
@@ -44,11 +44,15 @@ export async function POST(req) {
                 link: url.href
             });
         } catch {
+            if (webshopdata.affiliateID) {
+                url.hash = "";
+                url.search = `?tag=${webshopdata.affiliateID}`;
+            }
             return NextResponse.json({
                 title: body.title,
                 price: body.price,
                 image: null,
-                link: body.link
+                link: url.href
             });
         }
     }

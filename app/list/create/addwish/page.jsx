@@ -18,6 +18,7 @@ export default function AddWish() {
     const product_id = searchParams.get("product_id");
 
     const [link, setLink] = useState("");
+    const [finalLink, setFinalLink] = useState("");
     const [title, setTitle] = useState("");
     const [annotation, setAnnotation] = useState("");
     const [price, setPrice] = useState("");
@@ -45,7 +46,8 @@ export default function AddWish() {
             setProductImage(data.image);
             setTitle(data.title);
             setPrice(data.price);
-            setLink(data.link);
+            // setLink(data.link);
+            setFinalLink(data.link);
             setIsLoading(false);
         }
         fetchProduct();
@@ -74,18 +76,13 @@ export default function AddWish() {
             setAnnotation(product.annotation);
             setCurrency(product.currency);
             setLink(product.link);
+            setFinalLink(product.link);
             setIsLoading(false);
         }
         if (mode == "edit") {
             getProducts()
         }
     }, [link, mode]);
-
-    useEffect(() => {
-        //fix infinite refreshing on mobile
-        document.getElementById('link').focus();
-        document.getElementById('link').blur();
-    }, []);
 
     async function handleWishSave() {
         setIsLoading(true);
@@ -113,7 +110,7 @@ export default function AddWish() {
             id: product_id || generateUID(),
             title,
             price,
-            link,
+            link: finalLink,
             annotation,
             currency,
             image: productImage
