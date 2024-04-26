@@ -1,13 +1,14 @@
 "use client"
 
 import { Save, CircleHelp } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
 import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
 import { Link } from 'next-view-transitions';
 import Image from "next/image";
 import { generateUID } from "@/utils/generatID";
+import { v4 as uuidv4 } from "uuid";
 
 export default function AddWish() {
     const searchParams = useSearchParams();
@@ -16,16 +17,20 @@ export default function AddWish() {
     const list_id = searchParams.get("list_id");
     const mode = searchParams.get("mode");
     const product_id = searchParams.get("product_id");
+    let finalProductImage;
 
+    const [userId, setUserId] = useState("");
     const [link, setLink] = useState("");
     const [finalLink, setFinalLink] = useState("");
     const [title, setTitle] = useState("");
     const [annotation, setAnnotation] = useState("");
     const [price, setPrice] = useState("");
     const [currency, setCurrency] = useState("€");
-    const [productImage, setProductImage] = useState({});
+    const [productImage, setProductImage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
+
+    const customImageInput = useRef(null);
 
     useEffect(() => {
         async function fetchProduct() {
@@ -84,6 +89,20 @@ export default function AddWish() {
         }
     }, [link, mode]);
 
+    useEffect(() => {
+        async function getUser() {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user !== null) {
+                setUserId(user.id);
+            } else {
+                setUserId("");
+                setErrorMsg("Error getting User Id");
+                ShowErrorModal();
+            }
+        }
+        getUser();
+    }, []);
+
     async function handleWishSave() {
         setIsLoading(true);
         if (!title) {
@@ -106,6 +125,13 @@ export default function AddWish() {
             return;
         }
 
+        finalProductImage = productImage;
+
+        //check for custom image and upload it
+        if (customImageInput.current.files.length) {
+            await uploadImage();
+        }
+
         let updatedProducts = [{
             id: product_id || generateUID(),
             title,
@@ -113,7 +139,7 @@ export default function AddWish() {
             link: finalLink,
             annotation,
             currency,
-            image: productImage
+            image: finalProductImage
         }];
 
         if (mode == "edit") {
@@ -145,6 +171,55 @@ export default function AddWish() {
         }
         setIsLoading(false);
         router.push('/list/create?list_id=' + list_id);
+    }
+
+    async function uploadImage() {
+        const file = customImageInput.current.files[0];
+        const filePath = userId + "/" + uuidv4();
+
+        const { data, error } = await supabase
+            .storage
+            .from('product-images')
+            .upload(filePath, file);
+
+        if (data) {
+            await getImage(filePath);
+        } else  {
+            console.error(error);
+            setErrorMsg(error.message);
+            ShowErrorModal();
+        }
+    }
+
+    function displayCustomImage(event) {
+        const imageFile = event.target.files[0];
+        if (imageFile.size > 2*10**7) {
+            setErrorMsg("File is too big!");
+            ShowErrorModal();
+            return;
+        }
+        if (imageFile.type != "image/png" && imageFile.type != "image/jpg" && imageFile.type != "image/jpeg") {
+            setErrorMsg("File must be of type .png or .jpg!");
+            ShowErrorModal();
+            return;
+        }
+        const resultURL = URL.createObjectURL(imageFile);
+        setProductImage(resultURL);
+    }
+
+    async function getImage(filePath) {
+        const { data, error } = await supabase
+            .storage
+            .from('product-images')
+            .getPublicUrl(filePath);
+
+        if (data) {
+            finalProductImage = data.publicUrl;
+        } else {
+            console.error(error);
+            setErrorMsg(error.message);
+            ShowErrorModal();
+        }
     }
 
     return (
@@ -190,9 +265,9 @@ export default function AddWish() {
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text text-lg">Upload Product Image</span>
+                                <span className="label-text text-lg">Upload Product Image <small>(max. 20mb)</small></span>
                             </div>
-                            <input type="file" id="image" name="image" className="file-input file-input-bordered w-full" />
+                            <input disabled={isLoading} onChange={(e) => displayCustomImage(e)} ref={customImageInput} type="file" id="image" name="image" className="file-input file-input-bordered w-full" />
                         </label>
                         <div className="flex justify-center items-center mobile:justify-between flex-col mobile:flex-row mt-5">
                             <div className={`flex flex-col items-center mobile:items-start ${productImage?.length ? "visible" : "invisible"}`}>
