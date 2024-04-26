@@ -1,6 +1,6 @@
 "use client"
 
-import { Save, CircleHelp } from "lucide-react";
+import { Save, CircleHelp, ImageOff } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
@@ -224,6 +224,11 @@ export default function AddWish() {
         }
     }
 
+    function removeImage() {
+        setProductImage(null);
+        customImageInput.current.value = null;
+    }
+
     return (
         <>
             <div className="py-24 lg:px-24 w-full flex flex-col items-center px-4">
@@ -272,9 +277,9 @@ export default function AddWish() {
                             <input disabled={isLoading} onChange={(e) => displayCustomImage(e)} ref={customImageInput} type="file" id="image" name="image" className="file-input file-input-bordered w-full" />
                         </label>
                         <div className="flex justify-center items-center mobile:justify-between flex-col mobile:flex-row mt-5">
-                            <div className={`flex flex-col items-center mobile:items-start ${productImage?.length ? "visible" : "invisible"}`}>
+                            <div className={`flex flex-col gap-2 items-center mobile:items-start ${productImage?.length ? "visible" : "invisible"}`}>
                                 <img className="w-1/2" src={productImage} alt="Product Image" />
-                                <span>Product Image</span>
+                                <button onClick={removeImage} className="btn btn-error"><ImageOff />Remove Product Image</button>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Link href={'/list/create?list_id=' + list_id} className="btn btn-error">Cancel</Link>
