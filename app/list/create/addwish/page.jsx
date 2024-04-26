@@ -188,6 +188,12 @@ export default function AddWish() {
                                 </select>
                             </div>
                         </label>
+                        <label className="form-control w-full">
+                            <div className="label">
+                                <span className="label-text text-lg">Upload Product Image</span>
+                            </div>
+                            <input type="file" id="image" name="image" className="file-input file-input-bordered w-full" />
+                        </label>
                         <div className="flex justify-center items-center mobile:justify-between flex-col mobile:flex-row mt-5">
                             <div className={`flex flex-col items-center mobile:items-start ${productImage?.length ? "visible" : "invisible"}`}>
                                 <img className="w-1/2" src={productImage} alt="Product Image" />
