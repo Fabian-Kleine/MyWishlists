@@ -6,8 +6,8 @@ export default function ShareModal({ list_id, title, text, modalId }) {
 
     function shareLink() {
         const shareData = {
-            title,
-            text,
+            title: title || "",
+            text: text || "",
             url: wishlist_url
         }
 
