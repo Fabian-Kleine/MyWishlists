@@ -1,4 +1,4 @@
-import { Link } from 'next-view-transitions'
+import Link from 'next/link'
 import Image from "next/image"
 import { Home } from "lucide-react"
 
@@ -14,7 +14,7 @@ export default function NotFoundPage() {
                     <h1 className="text-3xl sm:text-4xl text-center font-bold ml-2">404 - Page Not Found!</h1>
                     <p>The page you are looking for was moved or doesn't exist!</p>
                 </div>
-                <Link href={'/'} className="btn btn-primary btn-lg font-bold"><Home />Home</Link>
+                <Link prefetch={false} href={'/'} className="btn btn-primary btn-lg font-bold"><Home />Home</Link>
             </div>
         </main>
     )
