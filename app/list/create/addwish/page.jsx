@@ -198,11 +198,13 @@ export default function AddWish() {
         if (imageFile.size > 2*10**7) {
             setErrorMsg("File is too big!");
             ShowErrorModal();
+            customImageInput.current.value = null;
             return;
         }
         if (imageFile.type != "image/png" && imageFile.type != "image/jpg" && imageFile.type != "image/jpeg") {
             setErrorMsg("File must be of type .png or .jpg!");
             ShowErrorModal();
+            customImageInput.current.value = null;
             return;
         }
         const resultURL = URL.createObjectURL(imageFile);
