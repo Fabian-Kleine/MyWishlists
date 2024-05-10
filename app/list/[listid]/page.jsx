@@ -4,6 +4,7 @@ import { ImageOff, ShoppingCart, Share2 } from "lucide-react";
 import ShareModal, { ShowShareModalButton } from "@/components/modals/ShareModal";
 import MarkAsPurchasedButton from "@/components/db/MarkAsPurchasedButton";
 import { redirect } from "next/navigation";
+import TextOverflow from "@/components/TextOverflow";
 
 async function getWishlist(list_id) {
     const { data: wishlist, error } = await supabase
@@ -62,7 +63,7 @@ export default async function Wishlist({ params: { listid } }) {
                             <div className="card-body">
                                 <h2 className="card-title text-2xl line-clamp-2">{product.title}</h2>
                                 {product.annotation ? (
-                                    <p className="line-clamp-3">{product.annotation}</p>
+                                    <TextOverflow clamp={3}>{product.annotation}</TextOverflow>
                                 ) : <></>}
                                 <div className="flex justify-start items-center">
                                     {product.price ? (
