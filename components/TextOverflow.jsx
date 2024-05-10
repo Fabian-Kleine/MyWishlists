@@ -15,7 +15,7 @@ export default function TextOverflow({ children, clamp, className, ...props }) {
             <span
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="text-primary font-bold cursor-pointer">
-                {isExpanded ? "Show less" : "Read more..."}
+                {isExpanded ? "Show less" : "Read more"}
             </span>
         </div>
     )
