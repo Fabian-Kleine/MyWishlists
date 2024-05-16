@@ -7,7 +7,7 @@ export default function Footer() {
                 <p>Copyright © 2024 - Made by <a className="underline font-bold" href="https://fabian-kleine.dev/" target="_blank">Fabian Kleine</a></p>
             </aside>
             <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-            <a href="https://fabian-kleine.dev/" target="_blank"><Globe /></a>
+                <a href="https://fabian-kleine.dev/project/mywishlists" target="_blank"><Globe /></a>
                 <a href="https://github.com/Fabian-Kleine/MyWishlists" target="_blank"><Github /></a>
             </nav>
         </footer>
