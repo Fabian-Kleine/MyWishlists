@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 import cheerio from "cheerio";
-import webshops from "./webshops";
+import webshops from "../../../utils/webshops";
 
 export async function POST(req) {
     const body = await req.json();
