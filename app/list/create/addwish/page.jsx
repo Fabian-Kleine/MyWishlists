@@ -40,12 +40,15 @@ export default function AddWish() {
                 title,
                 price
             }
+            const serverAbortController = new AbortController();
+            const serverSignal = serverAbortController.signal;
             const res = await fetch('/api/getProduct', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(productData)
+                body: JSON.stringify(productData),
+                signal: serverSignal
             });
             const data = await res.json();
             if (data.image) {
