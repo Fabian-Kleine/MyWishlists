@@ -1,9 +1,9 @@
 "use client"
 import { CircleAlert } from "lucide-react";
 
-export default function ErrorModal({ errorText }) {
+export default function ErrorModal({ errorText, defaultOpen=false }) {
     return (
-        <dialog className="modal" id="errorModal">
+        <dialog open={defaultOpen} className="modal" id="errorModal">
             <div className="modal-box flex justify-left items-center gap-5">
                 <CircleAlert height={60} width={60} className="text-error" />
                 <div>
