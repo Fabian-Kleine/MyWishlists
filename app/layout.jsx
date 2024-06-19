@@ -1,6 +1,7 @@
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
+import CheckSupabaseInstance from "@/utils/checkSupabaseInstance";
 
 //import components
 import Navbar from "@/components/Navbar";
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
     <ViewTransitions>
       <html lang="en">
         <body className={nunito_init.variable}>
+          <CheckSupabaseInstance />
           <Navbar />
           {children}
           <Footer />
