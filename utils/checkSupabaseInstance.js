@@ -10,7 +10,6 @@ export default function CheckSupabaseInstance() {
     const [returnStatus, setReturnStatus] = useState(<></>);
     useEffect(() => {
         async function getSupabaseStatus() {
-            console.log('test')
             try {
                 const { error } = await supabase
                 .from('statistics')
