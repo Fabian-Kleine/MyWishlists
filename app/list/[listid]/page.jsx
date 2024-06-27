@@ -63,7 +63,7 @@ export default async function Wishlist({ params: { listid } }) {
                             <div className="card-body">
                                 <h2 className="card-title text-2xl line-clamp-2">{product.title}</h2>
                                 {product.annotation ? (
-                                    <TextOverflow clamp={3}>{product.annotation}</TextOverflow>
+                                    <TextOverflow clamp={3} maxLength={165}>{product.annotation}</TextOverflow>
                                 ) : <></>}
                                 <div className="flex justify-start items-center">
                                     {product.price ? (

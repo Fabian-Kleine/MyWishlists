@@ -1,9 +1,12 @@
 "use client"
 import { useState } from "react"
 import classNames from "classnames";
+import { renderToString } from 'react-dom/server';
 
-export default function TextOverflow({ children, clamp, className, ...props }) {
+export default function TextOverflow({ children, clamp, className, maxLength, ...props }) {
     const [isExpanded, setIsExpanded] = useState(false);
+
+    const childrenString = renderToString(children);
 
     return (
         <div {...props} className={className}>
@@ -12,11 +15,13 @@ export default function TextOverflow({ children, clamp, className, ...props }) {
             >
                 {children}
             </p>
-            <span
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="text-primary font-bold cursor-pointer">
-                {isExpanded ? "Show less" : "Read more"}
-            </span>
+            {childrenString.length > maxLength && (
+                <span
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="text-primary font-bold cursor-pointer">
+                    {isExpanded ? "Show less" : "Read more"}
+                </span>
+            )}
         </div>
     )
 }
