@@ -29,6 +29,7 @@ const webshops = [
     },
     {
         hostname: "aboutyou",
+        imageQuery: '[data-testid="productImageView"]',
         replacePriceText: true,
         priceQuery: '[data-testid="finalPrice"]'
     }
