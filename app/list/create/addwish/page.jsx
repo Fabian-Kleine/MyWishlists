@@ -57,6 +57,7 @@ export default function AddWish() {
             setTitle(data.title);
             setPrice(data.price);
             // setLink(data.link);
+            setAnnotation(data.description);
             setFinalLink(data.link);
             setIsLoading(false);
         }
@@ -301,7 +302,7 @@ export default function AddWish() {
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
                     <h3 className="font-bold text-lg">Supported Websites</h3>
-                    <p className="py-4">Images, Titles and Prices can be fetched from these websites:</p>
+                    <p className="py-4">Prices can be fetched from these websites:</p>
                     <div className="flex justify-evenly flex-wrap gap-3">
                         <a href="https://amazon.com" target="_blank" className="card bg-base-100 shadow-xl image-full">
                             <figure className="h-32 w-56 flex justify-center items-center">
