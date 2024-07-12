@@ -154,7 +154,7 @@ export default function CreateList() {
                             <input defaultValue={wishlist?.deadline} onBlur={(e) => setDate(e.target.value)} disabled={!deadlineActive} id="date" name="date" type="date" className="input input-bordered w-full" />
                         </label>
                         <div className="flex justify-center mobile:justify-between flex-col mobile:flex-row flex-wrap items-center gap-5 mt-3">
-                            <Link href={`/list/create/addwish?list_id=${list_id}`} className="btn btn-primary px-24" type="button"><PackagePlus />Add Wish</Link>
+                            <Link href={`/list/create/addwish?list_id=${list_id}`} className="btn btn-primary px-24 w-full mobile:w-max" type="button"><PackagePlus />Add Wish</Link>
                             <div className="tooltip w-full mobile:w-min" data-tip="Share Wishlist">
                                 <button type="button" onClick={() => ShowShareModal()} className="btn btn-neutral mobile:btn-ghost mobile:btn-circle mobile:indent-[-9999px] w-full"><Share2 />Share</button>
                             </div>
