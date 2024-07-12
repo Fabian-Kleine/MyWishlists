@@ -2,6 +2,7 @@
 
 import { Pencil, Trash2, LinkIcon, Share2, SquarePlus } from "lucide-react";
 import ShareModal, { ShowShareModalButton } from "@/components/modals/ShareModal";
+import ErrorModal, { ShowErrorModal } from "@/components/modals/ErrorModal";
 import { supabase } from "@/utils/supabase";
 import { Link } from 'next-view-transitions';
 import DeleteWishlistButton from "@/components/db/DeleteWishlistButton";
@@ -26,23 +27,30 @@ async function getWishlists() {
             .from("wishlists")
             .select("*")
             .eq("user", userId);
-        
-        return wishlists.data;
+
+        return { data: wishlists.data, error: null };
     } catch (error) {
         console.error(error);
-        return [];
+        return { data: [], error };
     }
 }
 
 export default function MyLists() {
     const [wishlists, setWishlists] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [errorText, setErrorText] = useState("");
 
     useEffect(() => {
         async function loadWishlists() {
             setIsLoading(true);
-            const newWishlists = await getWishlists();
-            setWishlists(newWishlists);
+            const { data, error } = await getWishlists();
+            if (error) {
+                setErrorText(error);
+                ShowErrorModal();
+                setIsLoading(false);
+                return;
+            }
+            setWishlists(data);
             setIsLoading(false);
         }
 
@@ -84,6 +92,7 @@ export default function MyLists() {
                     </div>
                 )
             }
+            <ErrorModal errorText={errorText} />
         </>
     )
 }
