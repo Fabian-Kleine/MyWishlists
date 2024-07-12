@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-import Loading from "./loading";
 import { Link } from 'next-view-transitions';
 import CheckLoggedIn from "@/utils/checkLoggedIn";
 import { Gift } from "lucide-react";
@@ -13,9 +11,7 @@ export default function Layout({ children }) {
                     <Link className="btn btn-primary" href={"/list/create"}><Gift className="h-5 w-5" />Create Wishlist</Link>
                 </div>
                 <div className="flex flex-wrap justify-left w-full gap-4 mt-12">
-                    <Suspense fallback={<Loading />}>
-                        {children}
-                    </Suspense>
+                    {children}
                 </div>
             </div>
             <CheckLoggedIn redirectUrl={'/my/signin?unauthorized=1&redirectURL=%2Fmy%2Flists'} redirectOnValid={false} />
