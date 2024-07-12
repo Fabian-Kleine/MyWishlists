@@ -287,7 +287,7 @@ export default function AddWish() {
                                 <img className="w-1/2" src={productImage} alt="Product Image" />
                                 <button onClick={removeImage} className="btn btn-error"><ImageOff />Remove Product Image</button>
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2 mt-4 mobile:mt-0">
                                 <Link href={'/list/create?list_id=' + list_id} className="btn btn-error">Cancel</Link>
                                 <button onClick={handleWishSave} disabled={isLoading} className="btn btn-primary px-12">{isLoading ? <><span className="loading loading-spinner"></span>Loading</> : <><Save className="mr-1" />Save</>}</button>
                             </div>
