@@ -52,7 +52,7 @@ export default async function Wishlist({ params: { listid } }) {
             <div className="flex flex-wrap justify-center w-full gap-2 mt-8">
                 {wishlist?.products?.length ?
                     wishlist.products.map((product, index) =>
-                        <div href={product.link} target="_blank" key={index} className="card card-compact w-96 bg-base-100 shadow-xl h-fit">
+                        <div key={index} className="card card-compact w-96 bg-base-100 shadow-xl h-fit">
                             <figure className="h-[250px] flex justify-center items-center">
                                 {product.image ? (
                                     <img className="object-cover" src={product.image} alt="Product Image" />
