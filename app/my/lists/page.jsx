@@ -71,7 +71,7 @@ export default function MyLists() {
                                 <p className="line-clamp-3">{wishlist.description}</p>
                                 <div className="card-actions justify-center">
                                     <Link href={`/list/create?list_id=${wishlist.list_id}`} className="btn btn-sm btn-primary flex-grow"><Pencil className="h-4 w-4" />Edit</Link>
-                                    <DeleteWishlistButton list_id={wishlist.list_id} className="btn btn-sm btn-neutral flex-grow"><Trash2 className="h-4 w-4" />Delete</DeleteWishlistButton>
+                                    <DeleteWishlistButton list_id={wishlist.list_id} wishlists={wishlists} setWishlists={setWishlists} setErrorText={setErrorText} className="btn btn-sm btn-neutral flex-grow"><Trash2 className="h-4 w-4" />Delete</DeleteWishlistButton>
                                 </div>
                                 <div className="card-actions mt-1">
                                     <div className="tooltip tooltip-bottom" data-tip="Open Wishlist">

@@ -1,17 +1,26 @@
 "use client"
 import { supabase } from "@/utils/supabase";
-import { useRouter } from "next/navigation";
+import { ShowErrorModal } from "../modals/ErrorModal";
 
-export default function DeleteWishlistButton({ className, children, list_id }) {
-    const router = useRouter();
+export default function DeleteWishlistButton({ className, children, list_id, wishlists, setWishlists, setErrorText }) {
     async function deleteWishlist() {
-        const { error } = await supabase
-            .from("wishlists")
-            .delete()
-            .eq("list_id", list_id);
+        try {
+            const { error } = await supabase
+                .from("wishlists")
+                .delete()
+                .eq("list_id", list_id);
 
-        if (error) console.error(error);
-        router.refresh();
+            if (error) throw new Error(error);
+            const wishlistIndex = wishlists.map(w => w.id).indexOf(list_id);
+            const newWishlists = [...wishlists];
+            newWishlists.splice(wishlistIndex, 1);
+            setWishlists(newWishlists);
+        } catch (error) {
+            console.error(error);
+            setErrorText(error);
+            ShowErrorModal();
+        }
+
     }
 
     return (
