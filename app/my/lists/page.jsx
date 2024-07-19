@@ -7,9 +7,10 @@ import { supabase } from "@/utils/supabase";
 import { Link } from 'next-view-transitions';
 import DeleteWishlistButton from "@/components/db/DeleteWishlistButton";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Loading from "./loading";
 
-async function getWishlists() {
+async function getWishlists(router) {
     try {
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
@@ -31,11 +32,13 @@ async function getWishlists() {
         return { data: wishlists.data, error: null };
     } catch (error) {
         console.error(error);
+        if (error.includes("User session not found")) router.replace("/my/signin?unauthorized=1&redirectURL=%2Fmy%2Flists");
         return { data: [], error };
     }
 }
 
 export default function MyLists() {
+    const router = useRouter();
     const [wishlists, setWishlists] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [errorText, setErrorText] = useState("");
@@ -43,7 +46,7 @@ export default function MyLists() {
     useEffect(() => {
         async function loadWishlists() {
             setIsLoading(true);
-            const { data, error } = await getWishlists();
+            const { data, error } = await getWishlists(router);
             if (error) {
                 setErrorText(error);
                 ShowErrorModal();
