@@ -22,7 +22,7 @@ export default async function WebshopFetch(body) {
 
         const metadata = {
             title: $('meta[property="og:title"]').attr('content') || $('title').text() || '',
-            description: $('meta[name="description"]').attr('content') || $('meta[property="og:description"]').attr('content') || 'No description found',
+            description: $('meta[name="description"]').attr('content') || $('meta[property="og:description"]').attr('content') || "",
             image: $('meta[property="og:image"]').attr('content') || null,
         };
 
